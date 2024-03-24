@@ -133,11 +133,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1401189870931789682}
-  ind: {fileID: 0}
+  indicator: {fileID: 0}
   spawnWidth: 4.7
   spawnHeight: 4.7
-  wave: 1
-  maxCircleCount: 6
+  red: 0
+  green: 0
+  blue: 0
+  yellow: 0
+  currentColourCount: 0
+  redCount: 0
+  greenCount: 0
+  blueCount: 0
+  yellowCount: 0
   particleSystemColours:
   - {fileID: 6220009372713587728, guid: 1ae3a20bbfcd00041acb996cc516a34a, type: 3}
   - {fileID: 6220009372713587728, guid: 1d152bd06e17a8a4b94549456e637a0e, type: 3}
@@ -170,3 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colours: {fileID: 1763628616085528754}
+  indicator: {fileID: 0}
+  indicatorDuration: 2
+  currentWave: 0
+  maxCircleCount: 1
+  waveDelay: 2

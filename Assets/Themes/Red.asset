@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Red
   m_EditorClassIdentifier: 
   background: {r: 0.4056604, g: 0.066972226, b: 0.066972226, a: 1}
+  backgroundPanel: {r: 0.2, g: 0.033009708, b: 0.033009708, a: 1}
   foreground: {r: 0.9339623, g: 0.37943012, b: 0.3127893, a: 1}

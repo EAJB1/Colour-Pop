@@ -9,7 +9,7 @@ public class ScreenMode : MonoBehaviour
 {
     [SerializeField] TMP_InputField[] backgroundInputFields;
     [SerializeField] Graphic[] backgroundGraphics, foregroundGraphics;
-    [SerializeField] SpriteRenderer[] backgroundSprites, foregroundSprites;
+    [SerializeField] SpriteRenderer[] backgroundSprites, backgroundPanels, foregroundSprites;
     [SerializeField] TextMeshProUGUI[] foregroundCanvasUI;
     public List<Theme> themes = new List<Theme>();
     int currentThemeIndex = 0;
@@ -49,6 +49,11 @@ public class ScreenMode : MonoBehaviour
         foreach (TMP_InputField field in backgroundInputFields)
         {
             field.image.color = themes[currentThemeIndex].background;
+        }
+
+        foreach (SpriteRenderer sprite in backgroundPanels)
+        {
+            sprite.color = themes[currentThemeIndex].backgroundPanel;
         }
 
         foreach (Graphic g in foregroundGraphics)

@@ -1179,6 +1179,7 @@ MonoBehaviour:
   foregroundGraphics: []
   backgroundSprites:
   - {fileID: 7433350074908803142}
+  backgroundPanels:
   - {fileID: 5457099068717757644}
   - {fileID: 5503292661692252598}
   foregroundSprites:
@@ -2506,6 +2507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colours: {fileID: 0}
   waveManager: {fileID: 0}
+  circles: {fileID: 0}
   indicatorSR: {fileID: 6659091243672035056}
   availableColours:
   - {r: 0.88235295, g: 0.25490198, b: 0.25490198, a: 1}

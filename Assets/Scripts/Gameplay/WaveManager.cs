@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Indicator indicator;
 
     public float indicatorDuration = 2.0f;
-    public int currentWave = 0, maxCircleCount = 1;
+    public int currentWave = 0, maxCircleCount = 6;
 
     [SerializeField] float waveDelay = 2.0f;
 
