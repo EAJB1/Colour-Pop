@@ -14,8 +14,9 @@ public class Colours : MonoBehaviour
     float vectorX, vectorY, targetAnimationSpeed;
 
     public bool red, green, blue, yellow;
+    public int currentColourCount, redCount, greenCount, blueCount, yellowCount;
 
-    int indexOfTargets, randomTargetAnimation, keyColour, currentColourCount;
+    int indexOfTargets, randomTargetAnimation, keyColour;
 
     public ParticleSystem[] particleSystemColours;
 
@@ -45,7 +46,7 @@ public class Colours : MonoBehaviour
         Controls.playerControls.Player.Colour4.performed += Colour4;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         CurrentColours();
     }
@@ -60,28 +61,30 @@ public class Colours : MonoBehaviour
 
     void CurrentColours()
     {
-        currentColourCount = 0;
+        currentColourCount = 0; redCount = 0; greenCount = 0; blueCount = 0; yellowCount = 0;
+
         foreach (Transform t in transform)
         {
             Color temp = t.GetComponent<SpriteRenderer>().color;
-            Debug.Log(temp);
 
-            if (temp == indicator.availableColours[0]) { red = true; currentColourCount++; }
-            if (temp == indicator.availableColours[1]) { green = true; currentColourCount++; }
-            if (temp == indicator.availableColours[2]) { blue = true; currentColourCount++; }
-            if (temp == indicator.availableColours[3]) { yellow = true; currentColourCount++; }
+            if (temp == indicator.availableColours[0]) { redCount++; }
+            else if (temp == indicator.availableColours[1]) { greenCount++; }
+            else if (temp == indicator.availableColours[2]) { blueCount++; }
+            else if (temp == indicator.availableColours[3]) { yellowCount++; }
         }
+
+        if (redCount > 0) { currentColourCount++; red = true; } else { red = false; }
+        if (greenCount > 0) { currentColourCount++; green = true; } else { green = false; }
+        if (blueCount > 0) { currentColourCount++; blue = true; } else { blue = false; }
+        if (yellowCount > 0) { currentColourCount++; yellow = true; } else { yellow = false; }
     }
 
     public Color ReturnLastColour()
     {
-        if (currentColourCount == 1)
-        {
-            if (red) { return indicator.availableColours[0]; }
-            else if (blue) { return indicator.availableColours[1]; }
-            else if (green) { return indicator.availableColours[2]; }
-            else if (yellow) { return indicator.availableColours[3]; }
-        }
+        if (red) { return indicator.availableColours[0]; }
+        else if (green) { return indicator.availableColours[1]; }
+        else if (blue) { return indicator.availableColours[2]; }
+        else if (yellow) { return indicator.availableColours[3]; }
         return Color.black;
     }
 
@@ -118,6 +121,9 @@ public class Colours : MonoBehaviour
         else { return false; }
     }
 
+    /// <summary>
+    /// Spawn a new wave.
+    /// </summary>
     public void SpawnWave()
     {
         AssignRandomColour();
@@ -125,6 +131,9 @@ public class Colours : MonoBehaviour
         AnimateTarget();
     }
 
+    /// <summary>
+    /// Spawn a single colour.
+    /// </summary>
     void SpawnColour()
     {
         AssignInputColour();

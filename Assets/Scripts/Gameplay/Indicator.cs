@@ -101,7 +101,7 @@ public class Indicator : MonoBehaviour
     /// </summary>
     void OverrideColour()
     {
-        if (colours.ChildTotal() > 0 && colours.ReturnLastColour() != Color.black)
+        if (colours.currentColourCount == 1 && colours.ReturnLastColour() != Color.black)
         {
             currentIndicatorColour = colours.ReturnLastColour();
         }
