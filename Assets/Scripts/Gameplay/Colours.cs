@@ -14,7 +14,7 @@ public class Colours : MonoBehaviour
     float vectorX, vectorY, targetAnimationSpeed;
 
     public bool red, green, blue, yellow;
-    public int currentColourCount, redCount, greenCount, blueCount, yellowCount;
+    public int circleCount, currentColourCount, redCount, greenCount, blueCount, yellowCount;
 
     int indexOfTargets, randomTargetAnimation, keyColour;
 
@@ -72,6 +72,8 @@ public class Colours : MonoBehaviour
             else if (temp == indicator.availableColours[2]) { blueCount++; }
             else if (temp == indicator.availableColours[3]) { yellowCount++; }
         }
+
+        circleCount = redCount + greenCount + blueCount + yellowCount;
 
         if (redCount > 0) { currentColourCount++; red = true; } else { red = false; }
         if (greenCount > 0) { currentColourCount++; green = true; } else { green = false; }

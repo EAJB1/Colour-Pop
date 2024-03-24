@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] Colours colours;
     [SerializeField] Indicator indicator;
+    [SerializeField] TMP_Text waveNumber;
 
-    public float indicatorDuration = 2.0f;
-    public int currentWave = 0, maxCircleCount = 6;
+    public float indicatorDuration, minDuration = .25f, maxDuration = 2f, indicatorDecrease = .01f;
+    public int currentWave = -1, maxCircleCount = 1;
 
-    [SerializeField] float waveDelay = 2.0f;
+    private void Start()
+    {
+        indicatorDuration = maxDuration;
+    }
 
     void Update()
     {
         if (colours.ChildTotal() == 0)
         {
-            currentWave++;
+            InitWave();
+
             for (int i = 0; i < maxCircleCount; i++)
             {
                 colours.SpawnWave();
@@ -24,11 +30,11 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    IEnumerator DelayWaveSpawn()
+    void InitWave()
     {
-        // show wave title on screen
-        Debug.Log("WAVE " + currentWave);
-        yield return new WaitForSeconds(waveDelay);
-        // hide wave title on screen
+        currentWave++;
+        waveNumber.text = currentWave.ToString();
+        maxCircleCount = currentWave;
+        indicatorDuration = Mathf.Clamp(indicatorDuration -= indicatorDecrease, minDuration, maxDuration);
     }
 }
