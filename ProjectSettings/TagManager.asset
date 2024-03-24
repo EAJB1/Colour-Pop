@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Blue
+  - Green
+  - Red
+  - Yellow
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: ScreenBackground
+    uniqueID: 3138558539
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Colours
+    uniqueID: 579718077
+    locked: 0
+  - name: EdgeBackground
+    uniqueID: 3234113085
+    locked: 0
+  - name: EdgeOutline
+    uniqueID: 2141127673
+    locked: 0
+  - name: ScreenOutline
+    uniqueID: 2742586077
+    locked: 0
+  - name: Foreground
+    uniqueID: 2013643285
+    locked: 0
