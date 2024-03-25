@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Green
   m_EditorClassIdentifier: 
   background: {r: 0.13479628, g: 0.33962262, b: 0.05286579, a: 1}
-  backgroundPanel: {r: 0.06643677, g: 0.17, b: 0.025402296, a: 1}
+  backgroundEdge: {r: 0.058620676, g: 0.15, b: 0.02241379, a: 1}
   foreground: {r: 0.3372549, g: 0.91372555, b: 0.10980393, a: 1}

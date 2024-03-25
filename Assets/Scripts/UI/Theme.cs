@@ -8,6 +8,6 @@ using UnityEngine;
 public class Theme : ScriptableObject
 {
     public Color background;
-    public Color backgroundPanel;
+    public Color backgroundEdge;
     public Color foreground;
 }

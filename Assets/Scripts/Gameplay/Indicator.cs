@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Indicator : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Indicator : MonoBehaviour
 
     [SerializeField] Transform circles;
 
-    public SpriteRenderer indicatorSR;
+    public Graphic indicatorGraphic;
     public Color[] availableColours;
     public Dictionary<Color, int> colourWeights;
     public Color currentIndicatorColour;
@@ -22,10 +23,10 @@ public class Indicator : MonoBehaviour
     void Start()
     {
         // Find sprite renderer
-        indicatorSR = GetComponent<SpriteRenderer>();
+        indicatorGraphic = GetComponent<Graphic>();
 
         // Allocate a base colour
-        indicatorSR.color = Color.white;
+        indicatorGraphic.color = Color.white;
 
         colourWeights = new Dictionary<Color, int>();
 
@@ -47,7 +48,7 @@ public class Indicator : MonoBehaviour
             OverrideColour();
 
             // Set the object sprite renderer to the current colour
-            indicatorSR.color = currentIndicatorColour;
+            indicatorGraphic.color = currentIndicatorColour;
         }
     }
 

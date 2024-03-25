@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb7799b4c127d46ba95f4e9fda25d1, type: 3}
   m_Name: Dark
   m_EditorClassIdentifier: 
-  background: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 1}
-  backgroundPanel: {r: 0, g: 0, b: 0, a: 1}
-  foreground: {r: 0.93333334, g: 0.93333334, b: 0.93333334, a: 1}
+  background: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  backgroundEdge: {r: 0, g: 0, b: 0, a: 1}
+  foreground: {r: 0.4, g: 0.4, b: 0.4, a: 1}

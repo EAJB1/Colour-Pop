@@ -7,10 +7,7 @@ using UnityEngine.UI;
 
 public class ScreenMode : MonoBehaviour
 {
-    [SerializeField] TMP_InputField[] backgroundInputFields;
-    [SerializeField] Graphic[] backgroundGraphics, foregroundGraphics;
-    [SerializeField] SpriteRenderer[] backgroundSprites, backgroundPanels, foregroundSprites;
-    [SerializeField] TextMeshProUGUI[] foregroundCanvasUI;
+    [SerializeField] Graphic[] backgroundGraphics, backgroundEdgeGraphics, foregroundGraphics;
     public List<Theme> themes = new List<Theme>();
     int currentThemeIndex = 0;
 
@@ -41,34 +38,14 @@ public class ScreenMode : MonoBehaviour
             g.color = themes[currentThemeIndex].background;
         }
 
-        foreach (SpriteRenderer sprite in backgroundSprites)
+        foreach (Graphic g in backgroundEdgeGraphics)
         {
-            sprite.color = themes[currentThemeIndex].background;
-        }
-        
-        foreach (TMP_InputField field in backgroundInputFields)
-        {
-            field.image.color = themes[currentThemeIndex].background;
-        }
-
-        foreach (SpriteRenderer sprite in backgroundPanels)
-        {
-            sprite.color = themes[currentThemeIndex].backgroundPanel;
+            g.color = themes[currentThemeIndex].backgroundEdge;
         }
 
         foreach (Graphic g in foregroundGraphics)
         {
             g.color = themes[currentThemeIndex].foreground;
-        }
-
-        foreach (SpriteRenderer sprite in foregroundSprites)
-        {
-            sprite.color = themes[currentThemeIndex].foreground;
-        }
-
-        foreach (TextMeshProUGUI tMP in foregroundCanvasUI)
-        {
-            tMP.color = themes[currentThemeIndex].foreground;
         }
     }
 }

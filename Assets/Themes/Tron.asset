@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb7799b4c127d46ba95f4e9fda25d1, type: 3}
   m_Name: Tron
   m_EditorClassIdentifier: 
-  background: {r: 0, g: 0, b: 0, a: 1}
-  backgroundPanel: {r: 0, g: 0, b: 0, a: 1}
+  background: {r: 0, g: 0.15, b: 0.15, a: 1}
+  backgroundEdge: {r: 0, g: 0, b: 0, a: 1}
   foreground: {r: 0, g: 1, b: 1, a: 1}

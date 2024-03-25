@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1401189870931789682}
   - component: {fileID: 1763628616085528754}
   - component: {fileID: 2182140857866237402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   green: 0
   blue: 0
   yellow: 0
+  circleCount: 0
   currentColourCount: 0
   redCount: 0
   greenCount: 0
@@ -178,7 +179,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colours: {fileID: 1763628616085528754}
   indicator: {fileID: 0}
+  waveNumber: {fileID: 0}
   indicatorDuration: 2
+  minDuration: 0.25
+  maxDuration: 2
+  indicatorDecrease: 0.01
   currentWave: 0
   maxCircleCount: 1
-  waveDelay: 2
