@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class ScreenMode : MonoBehaviour
 {
-    [SerializeField] Graphic[] backgroundGraphics, backgroundEdgeGraphics, foregroundGraphics;
+    [SerializeField] SpriteRenderer screenBackground;
+    [SerializeField] Graphic[] backgroundEdgeGraphics, foregroundGraphics;
     public List<Theme> themes = new List<Theme>();
     int currentThemeIndex = 0;
 
@@ -33,11 +34,8 @@ public class ScreenMode : MonoBehaviour
 
     void UpdateTheme()
     {
-        foreach (Graphic g in backgroundGraphics)
-        {
-            g.color = themes[currentThemeIndex].background;
-        }
-
+        screenBackground.color = themes[currentThemeIndex].background;
+        
         foreach (Graphic g in backgroundEdgeGraphics)
         {
             g.color = themes[currentThemeIndex].backgroundEdge;

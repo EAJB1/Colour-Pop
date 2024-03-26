@@ -18,7 +18,7 @@ public class Indicator : MonoBehaviour
 
     int totalWeight = 4;
     int weightIndex;
-    bool crIsRunning = false;
+    bool coroutineRunning = false;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class Indicator : MonoBehaviour
     void Update()
     {
         // Run the coroutine when it is not running
-        if (!crIsRunning)
+        if (!coroutineRunning)
         {
             StartCoroutine(IndicatorWait());
 
@@ -54,12 +54,12 @@ public class Indicator : MonoBehaviour
 
     IEnumerator IndicatorWait()
     {
-        crIsRunning = true;
+        coroutineRunning = true;
 
         // Time allowed to destroy target
         yield return new WaitForSeconds(waveManager.currentIndicatorDuration);
 
-        crIsRunning = false;
+        coroutineRunning = false;
     }
 
     void ChooseColour()
