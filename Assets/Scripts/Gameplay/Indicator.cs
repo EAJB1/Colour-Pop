@@ -57,7 +57,7 @@ public class Indicator : MonoBehaviour
         crIsRunning = true;
 
         // Time allowed to destroy target
-        yield return new WaitForSeconds(waveManager.indicatorDuration);
+        yield return new WaitForSeconds(waveManager.currentIndicatorDuration);
 
         crIsRunning = false;
     }

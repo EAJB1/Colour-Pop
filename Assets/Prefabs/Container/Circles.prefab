@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f553bd056a8495640ae3258e7d6489b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1401189870931789682}
   indicator: {fileID: 0}
   spawnWidth: 4.7
   spawnHeight: 4.7
@@ -147,17 +146,17 @@ MonoBehaviour:
   greenCount: 0
   blueCount: 0
   yellowCount: 0
-  particleSystemColours:
-  - {fileID: 6220009372713587728, guid: 1ae3a20bbfcd00041acb996cc516a34a, type: 3}
-  - {fileID: 6220009372713587728, guid: 1d152bd06e17a8a4b94549456e637a0e, type: 3}
-  - {fileID: 6220009372713587728, guid: 63501a436fa9675489da6bbfbaff1a54, type: 3}
-  - {fileID: 6220009372713587728, guid: 9a2cc616b6830da45aa503ed64b88fc1, type: 3}
   targetColours:
   - {fileID: 3349960686785480607, guid: 397d3874ca0d24a46b9b4f3533bea067, type: 3}
   - {fileID: 3349960686785480607, guid: 3ebcf170feeb18846a1a90b04632925b, type: 3}
   - {fileID: 3349960686785480607, guid: 39fe29858d57a794680a710722613320, type: 3}
   - {fileID: 3349960686785480607, guid: ce93d66746f1a404c83c780b40ead0bd, type: 3}
   targetParent: {fileID: 1763628616085528765}
+  particleSystemColours:
+  - {fileID: 6220009372713587728, guid: 1ae3a20bbfcd00041acb996cc516a34a, type: 3}
+  - {fileID: 6220009372713587728, guid: 1d152bd06e17a8a4b94549456e637a0e, type: 3}
+  - {fileID: 6220009372713587728, guid: 63501a436fa9675489da6bbfbaff1a54, type: 3}
+  - {fileID: 6220009372713587728, guid: 9a2cc616b6830da45aa503ed64b88fc1, type: 3}
   particleColours:
   - {fileID: 6148673710903822674, guid: 1ae3a20bbfcd00041acb996cc516a34a, type: 3}
   - {fileID: 6148673710903822674, guid: 1d152bd06e17a8a4b94549456e637a0e, type: 3}
@@ -178,14 +177,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b0db6f8b0e5ba4abdc336ce26cd0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colours: {fileID: 1763628616085528754}
   indicator: {fileID: 0}
   waveNumber: {fileID: 0}
-  indicatorDuration: 2
+  currentIndicatorDuration: 0
   minDuration: 0.25
-  maxDuration: 2
+  maxDuration: 2.25
   indicatorDecrease: 0.01
-  currentWave: 0
+  currentWave: -1
   maxCircleCount: 1
 --- !u!114 &8745002111754360692
 MonoBehaviour:

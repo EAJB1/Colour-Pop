@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] Colours colours;
+    Colours colours;
     [SerializeField] Indicator indicator;
     [SerializeField] TMP_Text waveNumber;
 
-    public float indicatorDuration, minDuration = .25f, maxDuration = 2f, indicatorDecrease = .01f;
+    public float currentIndicatorDuration, minDuration = .25f, maxDuration = 2.25f, indicatorDecrease = .01f;
     public int currentWave = -1, maxCircleCount = 1;
 
-    private void Start()
+    void Start()
     {
-        indicatorDuration = maxDuration;
+        colours = GetComponent<Colours>();
+        currentIndicatorDuration = maxDuration;
     }
 
     void Update()
@@ -35,6 +36,6 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         waveNumber.text = currentWave.ToString();
         maxCircleCount = currentWave;
-        indicatorDuration = Mathf.Clamp(indicatorDuration -= indicatorDecrease, minDuration, maxDuration);
+        currentIndicatorDuration = Mathf.Clamp(currentIndicatorDuration -= indicatorDecrease, minDuration, maxDuration);
     }
 }
