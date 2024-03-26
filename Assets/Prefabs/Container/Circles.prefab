@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1401189870931789682}
   - component: {fileID: 1763628616085528754}
   - component: {fileID: 2182140857866237402}
+  - component: {fileID: 8745002111754360692}
   m_Layer: 7
   m_Name: Circles
   m_TagString: Untagged
@@ -186,3 +187,32 @@ MonoBehaviour:
   indicatorDecrease: 0.01
   currentWave: 0
   maxCircleCount: 1
+--- !u!114 &8745002111754360692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763628616085528765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32c6df7f2d6dba4da84f757804688a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: fa0bb5d53537b8141aed46b9025f6b15, type: 3}
+  - {fileID: 8300000, guid: 48054ac57637792489236ec88e39e61c, type: 3}
+  - {fileID: 8300000, guid: 0f35f188d4dac79498c8673d869fc1f1, type: 3}
+  - {fileID: 8300000, guid: c4a312de1b2bf5c44be4644e2ebb0e52, type: 3}
+  - {fileID: 8300000, guid: 9a93cc3fb6cfd1d4ab1425e9b90cd2a8, type: 3}
+  - {fileID: 8300000, guid: 1fffd95cc77f0754e9d958d883c6ca41, type: 3}
+  - {fileID: 8300000, guid: 90d51d69bf203f24ab4db3f68cf2d1b2, type: 3}
+  - {fileID: 8300000, guid: 3a62afca5d6b8b34284597b1330ea6ea, type: 3}
+  - {fileID: 8300000, guid: 8f8db10779447514b998b3ac05afe355, type: 3}
+  - {fileID: 8300000, guid: 24c3404d1dd6a894998e1a8c1a7075bc, type: 3}
+  - {fileID: 8300000, guid: e028b74feb1a36f4981eca5c54f33082, type: 3}
+  - {fileID: 8300000, guid: 1eca251daa78f804d86d782c60554ddd, type: 3}
+  - {fileID: 8300000, guid: 4c8bfa020a1d07149af814f9051d3aa1, type: 3}
+  - {fileID: 8300000, guid: 27d1cbb68d868fd4da86d899436c1e91, type: 3}
+  - {fileID: 8300000, guid: b048b8954655db24d975c77200d1804c, type: 3}

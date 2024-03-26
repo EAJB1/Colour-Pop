@@ -7,8 +7,9 @@ using UnityEngine.TextCore.LowLevel;
 
 public class Colours : MonoBehaviour
 {
-    public PlayerInput playerInput;
-    public Indicator indicator;
+    [SerializeField] PlayerInput playerInput;
+    [SerializeField] Indicator indicator;
+    [SerializeField] AudioManager audioManager;
 
     [SerializeField] float spawnWidth = 4.7f, spawnHeight = 4.7f;
     float vectorX, vectorY, targetAnimationSpeed;
@@ -114,15 +115,6 @@ public class Colours : MonoBehaviour
         CheckColour();
     }
 
-    bool Input()
-    {
-        if (UnityEngine.Input.GetKeyDown(KeyBinds.Key1)) { keyColour = 0; return true; }
-        else if (UnityEngine.Input.GetKeyDown(KeyBinds.Key2)) { keyColour = 1; return true; }
-        else if (UnityEngine.Input.GetKeyDown(KeyBinds.Key3)) { keyColour = 2; return true; }
-        else if (UnityEngine.Input.GetKeyDown(KeyBinds.Key4)) { keyColour = 3; return true; }
-        else { return false; }
-    }
-
     /// <summary>
     /// Spawn a new wave.
     /// </summary>
@@ -143,25 +135,34 @@ public class Colours : MonoBehaviour
         AnimateTarget();
     }
 
+    /// <summary>
+    /// Success if the player pressed the correct colour, else fail.
+    /// </summary>
     void CheckColour()
     {
-        if (indicator.availableColours[keyColour] == indicator.currentIndicatorColour) // Correct colour
+        if (indicator.availableColours[keyColour] == indicator.currentIndicatorColour) // Correct colour.
         {
             for (int i = 0; i < targetParent.transform.childCount; i++)
             {
                 targetSpriteRenderer = targetParent.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
                 
-                if (targetSpriteRenderer.color == indicator.availableColours[keyColour]) // Found 1st child object of the same colour
+                if (targetSpriteRenderer.color == indicator.availableColours[keyColour]) // Found 1st child object of the same colour.
                 {
+                    // Play sound effect.
+                    audioManager.PlayPopAudio();
+
+                    // Play particle effect.
                     InstantiatePS(targetParent.transform.GetChild(i).transform.position);
                     particleSystemColours[keyColour].Play();
+
+                    // Destroy colour game object.
                     Destroy(targetParent.transform.GetChild(i).gameObject);
                     particleSystemColours[keyColour].Stop();
                     break;
                 }
             }
         }
-        else if (indicator.availableColours[keyColour] != indicator.currentIndicatorColour) // Incorrect colour
+        else if (indicator.availableColours[keyColour] != indicator.currentIndicatorColour) // Incorrect colour.
         {
             SpawnColour();
         }
