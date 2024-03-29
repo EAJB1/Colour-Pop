@@ -118,7 +118,7 @@ public class Colours : MonoBehaviour
     /// </summary>
     void Failure()
     {
-        SpawnColour();
+        SpawnInputColour();
     }
 
     /// <summary>
@@ -162,9 +162,9 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn a new wave.
+    /// Spawn a single colour.
     /// </summary>
-    public void SpawnWave()
+    public void SpawnColour()
     {
         AssignRandomColour();
         InstantiateTarget();
@@ -172,9 +172,9 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn a single colour.
+    /// Spawn a single colour equal to the input colour.
     /// </summary>
-    void SpawnColour()
+    void SpawnInputColour()
     {
         AssignInputColour();
         InstantiateTarget();

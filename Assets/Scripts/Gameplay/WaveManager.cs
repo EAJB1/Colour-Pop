@@ -26,7 +26,7 @@ public class WaveManager : MonoBehaviour
 
             for (int i = 0; i < maxCircleCount; i++)
             {
-                colours.SpawnWave();
+                colours.SpawnColour();
             }
         }
     }
