@@ -19,8 +19,9 @@ public class Colours : MonoBehaviour
     float vectorX, vectorY;
 
     [Header("Target Properties")]
-    int indexOfTargets, randomTargetAnimation, keyColour;
+    int randomTargetAnimation, keyColour;
     GameObject target, targetClone;
+    public List<GameObject> clones = new List<GameObject>();
     public GameObject[] targetColours;
     public GameObject targetParent;
 
@@ -33,6 +34,8 @@ public class Colours : MonoBehaviour
     [Header("Animator Properties")]
     public float minAnimationSpeed = 0.25f;
     public float maxAnimationSpeed = 1.75f;
+    [SerializeField] int minAnim = 2, maxAnim = 16;
+    int[] layerOrder = new int[0];
     float targetAnimationSpeed;
     Animator targetAnimator;
     Vector2 targetPosition;
@@ -49,11 +52,27 @@ public class Colours : MonoBehaviour
         Controls.playerControls.Player.Colour2.performed += ColourKey;
         Controls.playerControls.Player.Colour3.performed += ColourKey;
         Controls.playerControls.Player.Colour4.performed += ColourKey;
+
+        // Reverse order in layers array to assign correct object layer.
+        ReverseArray(minAnim, maxAnim);
     }
 
     void FixedUpdate()
     {
         CurrentColours();
+    }
+
+    /// <summary>
+    /// Reverse the order of an array. For example, 0 to 9 becomes 9 to 0.
+    /// </summary>
+    public void ReverseArray(int minLength, int maxLength)
+    {
+        layerOrder = new int[maxLength - (minLength - 1)];
+
+        for (int i = 0; i < layerOrder.Length; i++)
+        {
+            layerOrder[i] = maxLength - i;
+        }
     }
 
     /// <summary>
@@ -64,6 +83,9 @@ public class Colours : MonoBehaviour
         return gameObject.transform.childCount;
     }
 
+    /// <summary>
+    /// Keep count of all the colours popped and which colours are currently active.
+    /// </summary>
     void CurrentColours()
     {
         currentColourCount = 0; redCount = 0; greenCount = 0; blueCount = 0; yellowCount = 0;
@@ -86,6 +108,10 @@ public class Colours : MonoBehaviour
         if (yellowCount > 0) { currentColourCount++; yellow = true; } else { yellow = false; }
     }
 
+
+    /// <summary>
+    /// Return the last colour popped in the wave.
+    /// </summary>
     public Color ReturnLastColour()
     {
         if (red) { return indicator.availableColours[0]; }
@@ -98,18 +124,22 @@ public class Colours : MonoBehaviour
     /// <summary>
     /// The colour corresponds with the indicator colour.
     /// </summary>
-    /// <param name="index"></param>
     void Success(int index)
     {
+        GameObject child = targetParent.transform.GetChild(index).gameObject;
+
         // Play sound effect.
         audioManager.PlayPopAudio();
 
         // Play particle effect.
-        InstantiatePS(targetParent.transform.GetChild(index).transform.position);
+        InstantiatePS(child.transform.position);
         particleSystemColours[keyColour].Play();
 
+        // Remove object from clones list.
+        clones.Remove(child);
+
         // Destroy colour game object.
-        Destroy(targetParent.transform.GetChild(index).gameObject);
+        Destroy(child);
         particleSystemColours[keyColour].Stop();
     }
 
@@ -124,7 +154,6 @@ public class Colours : MonoBehaviour
     /// <summary>
     /// When a button is pressed, update key colour and check colour value.
     /// </summary>
-    /// <param name="context"></param>
     void ColourKey(InputAction.CallbackContext context)
     {
         switch (context.action.name)
@@ -141,7 +170,7 @@ public class Colours : MonoBehaviour
 
 
     /// <summary>
-    /// Success if the player pressed the correct colour, else fail.
+    /// Check if the player pressed the correct colour.
     /// </summary>
     void CheckColour()
     {
@@ -169,6 +198,8 @@ public class Colours : MonoBehaviour
         AssignRandomColour();
         InstantiateTarget();
         AnimateTarget();
+        UpdateColourList(clones, targetParent);
+        UpdateOrderInLayer(randomTargetAnimation);
     }
 
     /// <summary>
@@ -179,13 +210,16 @@ public class Colours : MonoBehaviour
         AssignInputColour();
         InstantiateTarget();
         AnimateTarget();
+        UpdateColourList(clones, targetParent);
+        UpdateOrderInLayer(randomTargetAnimation);
     }
 
+    /// <summary>
+    /// Assign a random number within boundaries of target colours array.
+    /// </summary>
     void AssignRandomColour()
     {
-        // Choose random coloured object
-        indexOfTargets = UnityEngine.Random.Range(0, targetColours.Length);
-        target = targetColours[indexOfTargets];
+        target = targetColours[UnityEngine.Random.Range(0, targetColours.Length)];
     }
 
     /// <summary>
@@ -214,7 +248,6 @@ public class Colours : MonoBehaviour
     /// <summary>
     /// Spawn particle effect at the targets location.
     /// </summary>
-    /// <param name="position"></param>
     void InstantiatePS(Vector2 position)
     {
         particle = particleColours[keyColour];
@@ -235,11 +268,32 @@ public class Colours : MonoBehaviour
         targetAnimator.enabled = true;
 
         // Play random animation
-        randomTargetAnimation = UnityEngine.Random.Range(2, 16);
+        randomTargetAnimation = UnityEngine.Random.Range(minAnim, maxAnim);
         targetAnimator.SetTrigger("CircleTrigger" + randomTargetAnimation);
 
         // Set random animation speed
         targetAnimationSpeed = UnityEngine.Random.Range(minAnimationSpeed, maxAnimationSpeed);
         targetAnimator.speed = targetAnimationSpeed;
+    }
+
+    /// <summary>
+    /// Update the list of child objects.
+    /// </summary>
+    void UpdateColourList(List<GameObject> objects, GameObject parent)
+    {
+        objects.Clear();
+
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            objects.Add(parent.transform.GetChild(i).gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Update the objects sprite order in layer.
+    /// </summary>
+    void UpdateOrderInLayer(int index)
+    {
+        targetClone.GetComponent<SpriteRenderer>().sortingOrder = layerOrder[index - 1];
     }
 }
