@@ -42,9 +42,7 @@ public class Indicator : MonoBehaviour
         if (!coroutineRunning)
         {
             StartCoroutine(IndicatorWait());
-
             ChooseColour();
-
             OverrideColour();
 
             // Set the object sprite renderer to the current colour
@@ -52,13 +50,14 @@ public class Indicator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Time allowed to destroy circles.
+    /// </summary>
     IEnumerator IndicatorWait()
     {
         coroutineRunning = true;
-
-        // Time allowed to destroy target
-        yield return new WaitForSeconds(waveManager.currentIndicatorDuration);
-
+        waveManager.currentDuration = waveManager.totalIndicatorDuration;
+        yield return new WaitForSeconds(waveManager.totalIndicatorDuration);
         coroutineRunning = false;
     }
 
@@ -105,6 +104,7 @@ public class Indicator : MonoBehaviour
         if (colours.currentColourCount == 1 && colours.ReturnLastColour() != Color.black)
         {
             currentIndicatorColour = colours.ReturnLastColour();
+            waveManager.currentDuration = .00f;
         }
     }
 }

@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &178534828 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4072352133243846134, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+  m_PrefabInstance: {fileID: 7433350073405406997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +311,28 @@ MonoBehaviour:
 --- !u!114 &787377037 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9102466012232457749, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+  m_PrefabInstance: {fileID: 7433350073405406997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1207618396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6481256669886024050, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+  m_PrefabInstance: {fileID: 7433350073405406997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1401611890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5644772389243175321, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
   m_PrefabInstance: {fileID: 7433350073405406997}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -587,9 +620,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1444208346}
     - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
-      propertyPath: waveNumber
+      propertyPath: secondsTxt
+      value: 
+      objectReference: {fileID: 1401611890}
+    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
+      propertyPath: waveNumberTxt
       value: 
       objectReference: {fileID: 787377037}
+    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
+      propertyPath: indicatorDurationTxt
+      value: 
+      objectReference: {fileID: 1207618396}
+    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
+      propertyPath: totalIndicatorDurationTxt
+      value: 
+      objectReference: {fileID: 178534828}
     - target: {fileID: 8745002111754360692, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
       propertyPath: audioSource
       value: 

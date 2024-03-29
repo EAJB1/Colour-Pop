@@ -146,6 +146,7 @@ MonoBehaviour:
   greenCount: 0
   blueCount: 0
   yellowCount: 0
+  clones: []
   targetColours:
   - {fileID: 3349960686785480607, guid: 397d3874ca0d24a46b9b4f3533bea067, type: 3}
   - {fileID: 3349960686785480607, guid: 3ebcf170feeb18846a1a90b04632925b, type: 3}
@@ -165,6 +166,8 @@ MonoBehaviour:
   particleParent: {fileID: 0}
   minAnimationSpeed: 0.25
   maxAnimationSpeed: 1.75
+  minAnim: 2
+  maxAnim: 16
 --- !u!114 &2182140857866237402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +181,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 0}
-  waveNumber: {fileID: 0}
-  currentIndicatorDuration: 0
+  waveNumberTxt: {fileID: 0}
+  indicatorDurationTxt: {fileID: 0}
+  secondsTxt: {fileID: 0}
+  totalIndicatorDurationTxt: {fileID: 0}
+  maxDurationStr: ' MAX!'
+  secStr: (sec)
+  totalDurationStr: 'Total Duration '
+  totalIndicatorDuration: 0
+  currentDuration: 0
   minDuration: 0.25
   maxDuration: 2.25
   indicatorDecrease: 0.01

@@ -6,16 +6,21 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     Colours colours;
-    [SerializeField] Indicator indicator;
-    [SerializeField] TMP_Text waveNumber;
 
-    public float currentIndicatorDuration, minDuration = .25f, maxDuration = 2.25f, indicatorDecrease = .01f;
+    [SerializeField] Indicator indicator;
+    [SerializeField] TMP_Text waveNumberTxt, indicatorDurationTxt, secondsTxt, totalIndicatorDurationTxt;
+    [SerializeField] string maxDurationStr = " MAX!", secStr = "(sec)", totalDurationStr = "Total Duration ";
+
+    public float totalIndicatorDuration, currentDuration, minDuration = .25f, maxDuration = 2.25f, indicatorDecrease = .01f;
     public int currentWave = -1, maxCircleCount = 1;
+
+    bool coroutineRunning = false;
 
     void Start()
     {
         colours = GetComponent<Colours>();
-        currentIndicatorDuration = maxDuration;
+        totalIndicatorDuration = maxDuration;
+        secondsTxt.text = secStr;
     }
 
     void Update()
@@ -29,13 +34,48 @@ public class WaveManager : MonoBehaviour
                 colours.SpawnColour();
             }
         }
+
+        RefreshIndicator();
     }
 
     void InitWave()
     {
         currentWave++;
-        waveNumber.text = currentWave.ToString();
+        waveNumberTxt.text = currentWave.ToString();
         maxCircleCount = currentWave;
-        currentIndicatorDuration = Mathf.Clamp(currentIndicatorDuration -= indicatorDecrease, minDuration, maxDuration);
+        totalIndicatorDuration = Mathf.Clamp(totalIndicatorDuration -= indicatorDecrease, minDuration, maxDuration);
+        totalIndicatorDurationTxt.text = totalDurationStr + totalIndicatorDuration.ToString();
+        
+        if (currentDuration <= 0f)
+        {
+            currentDuration = totalIndicatorDuration;
+        }
+    }
+
+    void RefreshIndicator()
+    {
+        if (!coroutineRunning)
+        {
+            if (totalIndicatorDuration == minDuration)
+            {
+                indicatorDurationTxt.text = minDuration.ToString() + maxDurationStr;
+                secondsTxt.text = "";
+            }
+            else { StartCoroutine(UpdateIndicatorDuration()); }
+        }
+    }
+
+    IEnumerator UpdateIndicatorDuration()
+    {
+        coroutineRunning = true;
+        float milliseconds = .01f;
+
+        if (currentDuration > 0f) { currentDuration -= Mathf.Clamp(milliseconds, 0f, maxDuration); }
+        else { currentDuration = 0f; }
+        
+        indicatorDurationTxt.text = currentDuration.ToString();
+        yield return new WaitForSeconds(milliseconds);
+        
+        coroutineRunning = false;
     }
 }
