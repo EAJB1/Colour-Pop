@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dark
   m_EditorClassIdentifier: 
   background: {r: 0.15, g: 0.15, b: 0.15, a: 1}
-  backgroundEdge: {r: 0, g: 0, b: 0, a: 1}
-  foreground: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+  middleground: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  foreground: {r: 0.5, g: 0.5, b: 0.5, a: 1}

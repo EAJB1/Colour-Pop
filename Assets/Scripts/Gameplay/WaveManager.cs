@@ -9,8 +9,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] Indicator indicator;
     [SerializeField] TMP_Text waveNumberTxt, indicatorDurationTxt, secondsTxt, totalIndicatorDurationTxt;
-    [SerializeField] string maxDurationStr = " MAX!", secStr = "(sec)", totalDurationStr = "Total Duration ";
+    [SerializeField] string maxDurationStr = " MAX!", secStr = "(sec)";
 
+    public TMP_Text totalColoursPopped;
     public float totalIndicatorDuration, currentDuration, minDuration = .25f, maxDuration = 2.25f, indicatorDecrease = .01f;
     public int currentWave = -1, maxCircleCount = 1;
 
@@ -23,7 +24,7 @@ public class WaveManager : MonoBehaviour
         secondsTxt.text = secStr;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (colours.ChildTotal() == 0)
         {
@@ -44,12 +45,8 @@ public class WaveManager : MonoBehaviour
         waveNumberTxt.text = currentWave.ToString();
         maxCircleCount = currentWave;
         totalIndicatorDuration = Mathf.Clamp(totalIndicatorDuration -= indicatorDecrease, minDuration, maxDuration);
-        totalIndicatorDurationTxt.text = totalDurationStr + totalIndicatorDuration.ToString();
-        
-        if (currentDuration <= 0f)
-        {
-            currentDuration = totalIndicatorDuration;
-        }
+        totalIndicatorDurationTxt.text = totalIndicatorDuration.ToString();
+        currentDuration = 0f;
     }
 
     void RefreshIndicator()

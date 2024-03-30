@@ -136,11 +136,16 @@ MonoBehaviour:
   indicator: {fileID: 0}
   spawnWidth: 4.7
   spawnHeight: 4.7
+  colour1: {fileID: 0}
+  colour2: {fileID: 0}
+  colour3: {fileID: 0}
+  colour4: {fileID: 0}
   red: 0
   green: 0
   blue: 0
   yellow: 0
-  circleCount: 0
+  totalCirclePopped: 0
+  currentCircleCount: 0
   currentColourCount: 0
   redCount: 0
   greenCount: 0
@@ -187,8 +192,8 @@ MonoBehaviour:
   totalIndicatorDurationTxt: {fileID: 0}
   maxDurationStr: ' MAX!'
   secStr: (sec)
-  totalDurationStr: 'Total Duration '
-  totalIndicatorDuration: 0
+  totalColoursPopped: {fileID: 0}
+  totalIndicatorDuration: 2.25
   currentDuration: 0
   minDuration: 0.25
   maxDuration: 2.25

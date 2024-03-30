@@ -36,9 +36,13 @@ public class Indicator : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Run the coroutine when it is not running
+        NewIndicatorColour();
+    }
+
+    public void NewIndicatorColour()
+    {
         if (!coroutineRunning)
         {
             StartCoroutine(IndicatorWait());

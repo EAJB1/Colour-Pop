@@ -1,21 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore;
 
 public class Colours : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] Indicator indicator;
+    WaveManager waveManager;
     AudioManager audioManager;
 
     [Header("Circle Properties")]
     [SerializeField] float spawnWidth = 4.7f;
     [SerializeField] float spawnHeight = 4.7f;
+    [SerializeField] TMP_Text colour1, colour2, colour3, colour4;
     public bool red, green, blue, yellow;
-    public int circleCount, currentColourCount, redCount, greenCount, blueCount, yellowCount;
+    public int totalCirclePopped, currentCircleCount, currentColourCount,
+                redCount, greenCount, blueCount, yellowCount;
     float vectorX, vectorY;
 
     [Header("Target Properties")]
@@ -42,6 +48,7 @@ public class Colours : MonoBehaviour
 
     void Start()
     {
+        waveManager = GetComponent<WaveManager>();
         audioManager = GetComponent<AudioManager>();
 
         Controls.Init();
@@ -55,6 +62,8 @@ public class Colours : MonoBehaviour
 
         // Reverse order in layers array to assign correct object layer.
         ReverseArray(minAnim, maxAnim);
+
+        totalCirclePopped = 0;
     }
 
     void FixedUpdate()
@@ -92,7 +101,7 @@ public class Colours : MonoBehaviour
 
         foreach (Transform t in transform)
         {
-            Color temp = t.GetComponent<SpriteRenderer>().color;
+            UnityEngine.Color temp = t.GetComponent<SpriteRenderer>().color;
 
             if (temp == indicator.availableColours[0]) { redCount++; }
             else if (temp == indicator.availableColours[1]) { greenCount++; }
@@ -100,7 +109,7 @@ public class Colours : MonoBehaviour
             else if (temp == indicator.availableColours[3]) { yellowCount++; }
         }
 
-        circleCount = redCount + greenCount + blueCount + yellowCount;
+        currentCircleCount = redCount + greenCount + blueCount + yellowCount;
 
         if (redCount > 0) { currentColourCount++; red = true; } else { red = false; }
         if (greenCount > 0) { currentColourCount++; green = true; } else { green = false; }
@@ -112,13 +121,13 @@ public class Colours : MonoBehaviour
     /// <summary>
     /// Return the last colour popped in the wave.
     /// </summary>
-    public Color ReturnLastColour()
+    public UnityEngine.Color ReturnLastColour()
     {
         if (red) { return indicator.availableColours[0]; }
         else if (green) { return indicator.availableColours[1]; }
         else if (blue) { return indicator.availableColours[2]; }
         else if (yellow) { return indicator.availableColours[3]; }
-        return Color.black;
+        return UnityEngine.Color.black;
     }
 
     /// <summary>
@@ -141,6 +150,22 @@ public class Colours : MonoBehaviour
         // Destroy colour game object.
         Destroy(child);
         particleSystemColours[keyColour].Stop();
+
+        // Increment total circles popped.
+        totalCirclePopped++;
+
+        // Update total circles popped UI.
+        waveManager.totalColoursPopped.text = totalCirclePopped.ToString();
+
+        // Update each colour popped UI.
+        switch (keyColour)
+        {
+            case 0: colour1.text = (int.Parse(colour1.text) + 1).ToString(); break;
+            case 1: colour2.text = (int.Parse(colour2.text) + 1).ToString(); break;
+            case 2: colour3.text = (int.Parse(colour3.text) + 1).ToString(); break;
+            case 3: colour4.text = (int.Parse(colour4.text) + 1).ToString(); break;
+            default: break;
+        }
     }
 
     /// <summary>

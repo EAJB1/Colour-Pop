@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb7799b4c127d46ba95f4e9fda25d1, type: 3}
   m_Name: Green
   m_EditorClassIdentifier: 
-  background: {r: 0.13479628, g: 0.33962262, b: 0.05286579, a: 1}
-  backgroundEdge: {r: 0.058620676, g: 0.15, b: 0.02241379, a: 1}
+  background: {r: 0.058620676, g: 0.15, b: 0.02241379, a: 1}
+  middleground: {r: 0.14687496, g: 0.4, b: 0.046875, a: 1}
   foreground: {r: 0.3372549, g: 0.91372555, b: 0.10980393, a: 1}

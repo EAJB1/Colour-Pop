@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   background: {r: 0.092903234, g: 0.092903234, b: 0.18, a: 1}
-  backgroundEdge: {r: 0, g: 0, b: 0, a: 1}
+  middleground: {r: 0.055084735, g: 0.31779674, b: 0.5, a: 1}
   foreground: {r: 0.100302614, g: 0.58642334, b: 0.9245283, a: 1}

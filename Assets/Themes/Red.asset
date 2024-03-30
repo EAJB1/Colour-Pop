@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb7799b4c127d46ba95f4e9fda25d1, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
-  background: {r: 0.4056604, g: 0.066972226, b: 0.066972226, a: 1}
-  backgroundEdge: {r: 0.15, g: 0.024757283, b: 0.024757283, a: 1}
+  background: {r: 0.1, g: 0.015686274, b: 0.015686274, a: 1}
+  middleground: {r: 0.4039216, g: 0.06666667, b: 0.06666667, a: 1}
   foreground: {r: 0.9339623, g: 0.37943012, b: 0.3127893, a: 1}
