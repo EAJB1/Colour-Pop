@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.TextCore;
 
 public class Colours : MonoBehaviour
 {
@@ -20,7 +17,7 @@ public class Colours : MonoBehaviour
     [SerializeField] float spawnHeight = 4.7f;
     [SerializeField] TMP_Text colour1, colour2, colour3, colour4;
     public bool red, green, blue, yellow;
-    public int totalCirclePopped, currentCircleCount, currentColourCount,
+    public int totalCirclePopped = 0, currentCircleCount, currentColourCount,
                 redCount, greenCount, blueCount, yellowCount;
     float vectorX, vectorY;
 
@@ -31,10 +28,10 @@ public class Colours : MonoBehaviour
 
     [Header("Target Properties")]
     int randomTargetAnimation, keyColour;
-    GameObject target, targetClone;
+    GameObject targetClone;
     public List<GameObject> clones = new List<GameObject>();
     public GameObject[] targetColours;
-    public GameObject targetParent;
+    public GameObject target, targetParent;
 
     [Header("Particle System Properties")]
     public ParticleSystem[] particleSystemColours;
@@ -68,13 +65,7 @@ public class Colours : MonoBehaviour
         // Reverse order in layers array to assign correct object layer.
         ReverseArray(minAnim, maxAnim);
 
-        totalCirclePopped = 0;
         pointsChange = basePointsChange;
-    }
-
-    void FixedUpdate()
-    {
-        CurrentColours(); // Find a way to not call on update
     }
 
     /// <summary>
@@ -99,23 +90,30 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Keep count of all the colours popped and which colours are currently active.
+    /// Keep count of all the colours popped.
     /// </summary>
-    void CurrentColours()
+    void UpdateColourCount(Color colour, bool increment)
     {
-        currentColourCount = 0; redCount = 0; greenCount = 0; blueCount = 0; yellowCount = 0;
+        int change;
+        if (increment) { change = 1; }
+        else { change = -1; }
 
-        foreach (Transform t in transform)
-        {
-            UnityEngine.Color temp = t.GetComponent<SpriteRenderer>().color;
-
-            if (temp == indicator.availableColours[0]) { redCount++; }
-            else if (temp == indicator.availableColours[1]) { greenCount++; }
-            else if (temp == indicator.availableColours[2]) { blueCount++; }
-            else if (temp == indicator.availableColours[3]) { yellowCount++; }
-        }
+        if (colour == indicator.availableColours[0]) { redCount += change; }
+        else if (colour == indicator.availableColours[1]) { greenCount += change; }
+        else if (colour == indicator.availableColours[2]) { blueCount += change; }
+        else if (colour == indicator.availableColours[3]) { yellowCount += change; }
 
         currentCircleCount = redCount + greenCount + blueCount + yellowCount;
+    }
+
+    /// <summary>
+    /// Keep count of current colours popped (total 4 per wave) and which colours are currently active.
+    /// </summary>
+    IEnumerator CurrentActiveColours()
+    {
+        yield return new WaitForEndOfFrame();
+
+        currentColourCount = 0;
 
         if (redCount > 0) { currentColourCount++; red = true; } else { red = false; }
         if (greenCount > 0) { currentColourCount++; green = true; } else { green = false; }
@@ -123,21 +121,20 @@ public class Colours : MonoBehaviour
         if (yellowCount > 0) { currentColourCount++; yellow = true; } else { yellow = false; }
     }
 
-
     /// <summary>
     /// Return the last colour popped in the wave.
     /// </summary>
-    public UnityEngine.Color ReturnLastColour()
+    public Color ReturnLastColour()
     {
         if (red) { return indicator.availableColours[0]; }
         else if (green) { return indicator.availableColours[1]; }
         else if (blue) { return indicator.availableColours[2]; }
         else if (yellow) { return indicator.availableColours[3]; }
-        return UnityEngine.Color.black;
+        return Color.black;
     }
 
     /// <summary>
-    /// The colour corresponds with the indicator colour.
+    /// The colour corresponds with the indicator colour, so remove the circle.
     /// </summary>
     void Success(int index)
     {
@@ -178,6 +175,9 @@ public class Colours : MonoBehaviour
             case 3: colour4.text = (int.Parse(colour4.text) + 1).ToString(); break;
             default: break;
         }
+
+        UpdateColourCount(indicator.availableColours[keyColour], false);
+        StartCoroutine(CurrentActiveColours());
     }
 
     /// <summary>
@@ -232,9 +232,13 @@ public class Colours : MonoBehaviour
     /// </summary>
     public void SpawnColour()
     {
-        AssignRandomColour();
-        InstantiateTarget();
+        Color colour = AssignRandomColour();
+
+        InstantiateTarget(colour);
         AnimateTarget();
+
+        UpdateColourCount(colour, true);
+        StartCoroutine(CurrentActiveColours());
         UpdateColourList(clones, targetParent);
         UpdateOrderInLayer(randomTargetAnimation);
     }
@@ -244,9 +248,11 @@ public class Colours : MonoBehaviour
     /// </summary>
     void SpawnInputColour()
     {
-        AssignInputColour();
-        InstantiateTarget();
+        InstantiateTarget(AssignInputColour());
         AnimateTarget();
+
+        UpdateColourCount(indicator.availableColours[keyColour], true);
+        StartCoroutine(CurrentActiveColours());
         UpdateColourList(clones, targetParent);
         UpdateOrderInLayer(randomTargetAnimation);
     }
@@ -254,24 +260,27 @@ public class Colours : MonoBehaviour
     /// <summary>
     /// Assign a random number within boundaries of target colours array.
     /// </summary>
-    void AssignRandomColour()
+    Color AssignRandomColour()
     {
-        target = targetColours[UnityEngine.Random.Range(0, targetColours.Length)];
+        return indicator.availableColours[UnityEngine.Random.Range(0, indicator.availableColours.Length)];
     }
 
     /// <summary>
     /// Assigns the current input colour to target.
     /// </summary>
-    void AssignInputColour()
+    Color AssignInputColour()
     {
-        target = targetColours[keyColour];
+        return indicator.availableColours[keyColour];
     }
 
     /// <summary>
     /// Spawn circle in the world.
     /// </summary>
-    void InstantiateTarget()
+    void InstantiateTarget(Color colour)
     {
+        // Set target colour.
+        target.GetComponent<SpriteRenderer>().color = colour;
+
         // Choose random position (within the boundary)
         vectorX = UnityEngine.Random.Range(-spawnWidth, spawnWidth);
         vectorY = UnityEngine.Random.Range(-spawnHeight, spawnHeight);
