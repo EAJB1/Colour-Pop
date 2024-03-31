@@ -24,6 +24,11 @@ public class Colours : MonoBehaviour
                 redCount, greenCount, blueCount, yellowCount;
     float vectorX, vectorY;
 
+    [Header("Points")]
+    [SerializeField] TMP_Text pointsNumberTxt;
+    public float currentPoints, pointsChange, multiplier;
+    [SerializeField] float basePointsChange = 100f;
+
     [Header("Target Properties")]
     int randomTargetAnimation, keyColour;
     GameObject target, targetClone;
@@ -64,11 +69,12 @@ public class Colours : MonoBehaviour
         ReverseArray(minAnim, maxAnim);
 
         totalCirclePopped = 0;
+        pointsChange = basePointsChange;
     }
 
     void FixedUpdate()
     {
-        CurrentColours();
+        CurrentColours(); // Find a way to not call on update
     }
 
     /// <summary>
@@ -150,6 +156,12 @@ public class Colours : MonoBehaviour
         // Destroy colour game object.
         Destroy(child);
         particleSystemColours[keyColour].Stop();
+
+        // Add points.
+        currentPoints = PointsManager.AddPoints(currentPoints, pointsChange);
+
+        // Update points UI.
+        pointsNumberTxt.text = PointsManager.UpdatePointsText(pointsNumberTxt, currentPoints);
 
         // Increment total circles popped.
         totalCirclePopped++;

@@ -151,6 +151,11 @@ MonoBehaviour:
   greenCount: 0
   blueCount: 0
   yellowCount: 0
+  pointsNumberTxt: {fileID: 0}
+  currentPoints: 0
+  pointsChange: 0
+  multiplier: 0
+  basePointsChange: 100
   clones: []
   targetColours:
   - {fileID: 3349960686785480607, guid: 397d3874ca0d24a46b9b4f3533bea067, type: 3}
