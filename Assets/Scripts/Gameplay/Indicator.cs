@@ -22,7 +22,7 @@ public class Indicator : MonoBehaviour
 
     int totalWeight = 4;
     int weightIndex;
-    bool coroutineRunningCurrent = false;
+    bool coroutineRunningCurrent = false, isFirstMillisecond = true;
 
     void Start()
     {
@@ -60,6 +60,7 @@ public class Indicator : MonoBehaviour
             }
             else if (waveManager.currentWave > 1 && currentDuration <= 0) // Start new indicator colour.
             {
+                isFirstMillisecond = true;
                 currentDuration = totalIndicatorDuration;
 
                 ChooseColour();
@@ -79,14 +80,14 @@ public class Indicator : MonoBehaviour
         coroutineRunningCurrent = true;
         float millisecond = .01f;
 
-        if (currentDuration > 0f)
+        if (currentDuration > 0f && !isFirstMillisecond)
         {
             currentDuration -= millisecond;
             currentDuration = (float)System.Math.Round((decimal)currentDuration, 2);
         }
-        else { currentDuration = 0f; }
+        else if (currentDuration < 0f) { currentDuration = 0f; }
+        else { isFirstMillisecond = false; }
 
-        //currentDuration = Mathf.Clamp(currentDuration, 0f, maxDuration);
         indicatorDurationTxt.text = currentDuration.ToString();
 
         yield return new WaitForSeconds(millisecond);
