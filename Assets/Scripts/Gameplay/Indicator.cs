@@ -60,10 +60,12 @@ public class Indicator : MonoBehaviour
             }
             else if (waveManager.currentWave > 1 && currentDuration <= 0) // Start new indicator colour.
             {
+                colours.SpawnColour();
+
                 isFirstMillisecond = true;
                 currentDuration = totalIndicatorDuration;
 
-                ChooseColour();
+                ChooseRandomColour();
                 OverrideColour();
 
                 // Set the object sprite renderer to the current colour.
@@ -94,10 +96,10 @@ public class Indicator : MonoBehaviour
         coroutineRunningCurrent = false;
     }
 
-    void ChooseColour()
+    void ChooseRandomColour()
     {
         // Choose random colour
-        weightIndex = UnityEngine.Random.Range(0, totalWeight);
+        weightIndex = Random.Range(0, totalWeight);
 
         // Account for colour weight
         List<int> newWeights = new List<int>();
