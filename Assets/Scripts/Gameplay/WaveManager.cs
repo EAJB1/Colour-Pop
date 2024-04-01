@@ -8,71 +8,43 @@ public class WaveManager : MonoBehaviour
     Colours colours;
 
     [SerializeField] Indicator indicator;
-    [SerializeField] TMP_Text waveNumberTxt, indicatorDurationTxt, secondsTxt, totalIndicatorDurationTxt;
-    [SerializeField] string maxDurationStr = " MAX!", secStr = "(sec)";
+    [SerializeField] TMP_Text waveNumberTxt;
 
     public TMP_Text totalColoursPopped;
-    public float totalIndicatorDuration, currentDuration, minDuration = .25f, maxDuration = 2.25f, indicatorDecrease = .01f;
-    public int currentWave = -1, maxCircleCount = 1;
-
-    bool coroutineRunning = false;
+    public int currentWave = 0, maxCircleCount = 1;
 
     void Start()
     {
         colours = GetComponent<Colours>();
-        totalIndicatorDuration = maxDuration;
-        secondsTxt.text = secStr;
+
+        // Start the first wave.
+        colours.UpdateCircleCount();
+        colours.CheckWaveState();
     }
 
-    void FixedUpdate()
-    {
-        if (colours.ChildTotal() == 0)
-        {
-            InitWave();
-
-            for (int i = 0; i < maxCircleCount; i++)
-            {
-                colours.SpawnColour();
-            }
-        }
-
-        RefreshIndicator();
-    }
-
-    void InitWave()
+    public void InitWave()
     {
         currentWave++;
         waveNumberTxt.text = currentWave.ToString();
         maxCircleCount = currentWave;
-        totalIndicatorDuration = Mathf.Clamp(totalIndicatorDuration -= indicatorDecrease, minDuration, maxDuration);
-        totalIndicatorDurationTxt.text = totalIndicatorDuration.ToString();
-        currentDuration = 0f;
-    }
 
-    void RefreshIndicator()
-    {
-        if (!coroutineRunning)
+        if (currentWave > 1)
         {
-            if (totalIndicatorDuration == minDuration)
-            {
-                indicatorDurationTxt.text = minDuration.ToString() + maxDurationStr;
-                secondsTxt.text = "";
-            }
-            else { StartCoroutine(UpdateIndicatorDuration()); }
+            indicator.totalIndicatorDuration = Mathf.Clamp(
+                indicator.totalIndicatorDuration -= indicator.indicatorDecrease, 
+                indicator.minDuration, 
+                indicator.maxDuration);
         }
+
+        indicator.totalIndicatorDurationTxt.text = indicator.totalIndicatorDuration.ToString();
+        indicator.currentDuration = indicator.totalIndicatorDuration;
     }
 
-    IEnumerator UpdateIndicatorDuration()
+    public void SpawnWave()
     {
-        coroutineRunning = true;
-        float milliseconds = .01f;
-
-        if (currentDuration > 0f) { currentDuration -= Mathf.Clamp(milliseconds, 0f, maxDuration); }
-        else { currentDuration = 0f; }
-        
-        indicatorDurationTxt.text = currentDuration.ToString();
-        yield return new WaitForSeconds(milliseconds);
-        
-        coroutineRunning = false;
+        for (int i = 0; i < maxCircleCount; i++)
+        {
+            colours.SpawnColour();
+        }
     }
 }

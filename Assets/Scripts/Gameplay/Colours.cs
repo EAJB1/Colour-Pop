@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,7 +18,7 @@ public class Colours : MonoBehaviour
     [SerializeField] float spawnHeight = 4.7f;
     [SerializeField] TMP_Text colour1, colour2, colour3, colour4;
     public bool red, green, blue, yellow;
-    public int totalCirclePopped = 0, currentCircleCount, currentColourCount,
+    public int totalCirclePopped, currentCircleCount, currentColourCount,
                 redCount, greenCount, blueCount, yellowCount;
     float vectorX, vectorY;
 
@@ -30,7 +31,6 @@ public class Colours : MonoBehaviour
     int randomTargetAnimation, keyColour;
     GameObject targetClone;
     public List<GameObject> clones = new List<GameObject>();
-    public GameObject[] targetColours;
     public GameObject target, targetParent;
 
     [Header("Particle System Properties")]
@@ -82,15 +82,7 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Return number of children under this gameobject.
-    /// </summary>
-    public int ChildTotal()
-    {
-        return gameObject.transform.childCount;
-    }
-
-    /// <summary>
-    /// Keep count of all the colours popped.
+    /// Keep an individual count of the 4 colours in the current wave.
     /// </summary>
     void UpdateColourCount(Color colour, bool increment)
     {
@@ -102,7 +94,13 @@ public class Colours : MonoBehaviour
         else if (colour == indicator.availableColours[1]) { greenCount += change; }
         else if (colour == indicator.availableColours[2]) { blueCount += change; }
         else if (colour == indicator.availableColours[3]) { yellowCount += change; }
+    }
 
+    /// <summary>
+    /// Keep count of all the circles in the current wave.
+    /// </summary>
+    public void UpdateCircleCount()
+    {
         currentCircleCount = redCount + greenCount + blueCount + yellowCount;
     }
 
@@ -122,7 +120,19 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Return the last colour popped in the wave.
+    /// Spawn a new wave when there are no circles left.
+    /// </summary>
+    public void CheckWaveState()
+    {
+        if (currentCircleCount == 0)
+        {
+            waveManager.InitWave();
+            waveManager.SpawnWave();
+        }
+    }
+
+    /// <summary>
+    /// Return the last colour in the wave.
     /// </summary>
     public Color ReturnLastColour()
     {
@@ -177,7 +187,10 @@ public class Colours : MonoBehaviour
         }
 
         UpdateColourCount(indicator.availableColours[keyColour], false);
+        UpdateCircleCount();
         StartCoroutine(CurrentActiveColours());
+
+        CheckWaveState();
     }
 
     /// <summary>
@@ -238,6 +251,7 @@ public class Colours : MonoBehaviour
         AnimateTarget();
 
         UpdateColourCount(colour, true);
+        UpdateCircleCount();
         StartCoroutine(CurrentActiveColours());
         UpdateColourList(clones, targetParent);
         UpdateOrderInLayer(randomTargetAnimation);
@@ -252,6 +266,7 @@ public class Colours : MonoBehaviour
         AnimateTarget();
 
         UpdateColourCount(indicator.availableColours[keyColour], true);
+        UpdateCircleCount();
         StartCoroutine(CurrentActiveColours());
         UpdateColourList(clones, targetParent);
         UpdateOrderInLayer(randomTargetAnimation);

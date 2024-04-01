@@ -615,10 +615,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1763628616085528754, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 6724663385767642979, guid: 289ff64547ec3d64e96cb5f3681da097, type: 3}
-    - target: {fileID: 1763628616085528754, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
       propertyPath: colour1
       value: 
       objectReference: {fileID: 1213969887}
@@ -699,10 +695,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1444208346}
     - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
-      propertyPath: secondsTxt
-      value: 
-      objectReference: {fileID: 1401611890}
-    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
       propertyPath: waveNumberTxt
       value: 
       objectReference: {fileID: 787377037}
@@ -710,14 +702,6 @@ PrefabInstance:
       propertyPath: totalColoursPopped
       value: 
       objectReference: {fileID: 734191952}
-    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
-      propertyPath: indicatorDurationTxt
-      value: 
-      objectReference: {fileID: 1207618396}
-    - target: {fileID: 2182140857866237402, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
-      propertyPath: totalIndicatorDurationTxt
-      value: 
-      objectReference: {fileID: 178534828}
     - target: {fileID: 8745002111754360692, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
       propertyPath: audioSource
       value: 
@@ -824,9 +808,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1763628615691213003}
     - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+      propertyPath: secondsTxt
+      value: 
+      objectReference: {fileID: 1401611890}
+    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1763628615691213004}
+    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+      propertyPath: indicatorDurationTxt
+      value: 
+      objectReference: {fileID: 1207618396}
+    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+      propertyPath: totalIndicatorDurationTxt
+      value: 
+      objectReference: {fileID: 178534828}
     - target: {fileID: 3246255572164264964, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
       propertyPath: m_RootOrder
       value: 1

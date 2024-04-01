@@ -157,11 +157,7 @@ MonoBehaviour:
   multiplier: 0
   basePointsChange: 100
   clones: []
-  targetColours:
-  - {fileID: 3349960686785480607, guid: 397d3874ca0d24a46b9b4f3533bea067, type: 3}
-  - {fileID: 3349960686785480607, guid: 3ebcf170feeb18846a1a90b04632925b, type: 3}
-  - {fileID: 3349960686785480607, guid: 39fe29858d57a794680a710722613320, type: 3}
-  - {fileID: 3349960686785480607, guid: ce93d66746f1a404c83c780b40ead0bd, type: 3}
+  target: {fileID: 6724663385767642979, guid: 289ff64547ec3d64e96cb5f3681da097, type: 3}
   targetParent: {fileID: 1763628616085528765}
   particleSystemColours:
   - {fileID: 6220009372713587728, guid: 1ae3a20bbfcd00041acb996cc516a34a, type: 3}
@@ -198,12 +194,12 @@ MonoBehaviour:
   maxDurationStr: ' MAX!'
   secStr: (sec)
   totalColoursPopped: {fileID: 0}
-  totalIndicatorDuration: 2.25
+  totalIndicatorDuration: 0
   currentDuration: 0
   minDuration: 0.25
   maxDuration: 2.25
   indicatorDecrease: 0.01
-  currentWave: -1
+  currentWave: 0
   maxCircleCount: 1
 --- !u!114 &8745002111754360692
 MonoBehaviour:
