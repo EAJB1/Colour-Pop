@@ -276,6 +276,21 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
+    /// Spawn a single colour the same as the indicator colour.
+    /// </summary>
+    public void SpawnIndicatorColour()
+    {
+        InstantiateTarget(indicator.currentIndicatorColour);
+        AnimateTarget();
+
+        UpdateColourCount(indicator.currentIndicatorColour, true);
+        UpdateCircleCount();
+        StartCoroutine(CurrentActiveColours());
+        UpdateColourList(clones, targetParent);
+        UpdateOrderInLayer(randomTargetAnimation);
+    }
+
+    /// <summary>
     /// Assign a random number within boundaries of target colours array.
     /// </summary>
     Color AssignRandomColour()
@@ -289,6 +304,37 @@ public class Colours : MonoBehaviour
     Color AssignInputColour()
     {
         return indicator.availableColours[keyColour];
+    }
+
+    Color AssignRemainingColour()
+    {
+        // Assign lowest remaining colour.
+        int[] count = new int[indicator.availableColours.Length];
+
+        count[0] = redCount;
+        count[1] = greenCount;
+        count[2] = blueCount;
+        count[3] = yellowCount;
+
+        int lowest = count[0];
+
+        if (lowest <= 0) { lowest = 1; }
+
+        int colour = 0;
+
+        for (int i = 0; i < count.Length; i++)
+        {
+            if (count[i] < lowest)
+            {
+                lowest = count[i];
+                colour = i;
+            }
+        }
+
+        return indicator.availableColours[colour];
+
+        // If each colour count is equal then assin random colour.
+
     }
 
     /// <summary>

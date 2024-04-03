@@ -46,34 +46,34 @@ public class Indicator : MonoBehaviour
     {
         if (!coroutineRunningCurrent)
         {
+            if (waveManager.currentWave == 1) // Set first indicator colour.
+            {
+                currentIndicatorColour = colours.ReturnLastColour();
+                indicatorGraphic.color = currentIndicatorColour;
+            }
+
             if (totalIndicatorDuration == minDuration) // Stop at min duration.
             {
                 indicatorDurationTxt.text = minDuration.ToString() + maxDurationStr;
                 secondsTxt.text = "";
             }
-            else if (waveManager.currentWave == 1) // Set first indicator colour.
+            else if (currentDuration <= 0) // Set new indicator colour.
             {
-                currentIndicatorColour = colours.ReturnLastColour();
-                indicatorGraphic.color = currentIndicatorColour;
-
-                StartCoroutine(CurrentIndicatorDuration());
-            }
-            else if (waveManager.currentWave > 1 && currentDuration <= 0) // Start new indicator colour.
-            {
-                colours.SpawnColour();
-
                 isFirstMillisecond = true;
                 currentDuration = totalIndicatorDuration;
 
                 ChooseRandomColour();
                 OverrideColour();
 
+                // Spawn a circle with the new indicator colour.
+                colours.SpawnIndicatorColour();
+
                 // Set the object sprite renderer to the current colour.
                 indicatorGraphic.color = currentIndicatorColour;
 
                 StartCoroutine(CurrentIndicatorDuration());
             }
-            else { StartCoroutine(CurrentIndicatorDuration()); }
+            else { StartCoroutine(CurrentIndicatorDuration()); } // Decrement current duration.
         }
     }
 
@@ -139,7 +139,7 @@ public class Indicator : MonoBehaviour
         if (colours.currentColourCount == 1 && colours.ReturnLastColour() != Color.black)
         {
             currentIndicatorColour = colours.ReturnLastColour();
-            currentDuration = 0f;
+            //currentDuration = 0f;
         }
     }
 }
