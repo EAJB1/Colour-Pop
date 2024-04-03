@@ -181,9 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenBackground: {fileID: 0}
-  backgroundEdgeGraphics:
-  - {fileID: 0}
-  - {fileID: 0}
+  backgroundGraphics: []
+  middlegroundGraphics: []
   foregroundGraphics:
   - {fileID: 2310136605074788790}
   - {fileID: 6150522897216051050}
@@ -213,9 +212,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e5beb77522c7c14e822bc9e73bd6539, type: 2}
   - {fileID: 11400000, guid: 4280d4b3ec6bc8540904ded9421f9c15, type: 2}
   - {fileID: 11400000, guid: da50ce1d89691b94dbf1f30d56bf1eb1, type: 2}
-  - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
   - {fileID: 11400000, guid: 47159dcd9f49c6648b370f969c4ce924, type: 2}
   - {fileID: 11400000, guid: 406c564d77380ed44a9e06d11d0f412a, type: 2}
+  - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
 --- !u!1 &2557995711632712441
 GameObject:
   m_ObjectHideFlags: 0

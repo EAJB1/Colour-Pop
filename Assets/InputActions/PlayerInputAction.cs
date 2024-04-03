@@ -231,6 +231,24 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ThemeBackwards"",
+                    ""type"": ""Button"",
+                    ""id"": ""169abb54-d407-4e04-ab31-e0f2e6929078"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThemeForwards"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7a2338e-29bd-4e4f-bcf9-d3ca57ac12cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""e1b17cdd-3125-4693-bf76-efcca920eeea"",
@@ -719,6 +737,50 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b6e0c98-4951-4024-827a-ea812ba2c77d"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeForwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1e1fb0b-3460-4f50-b706-f5746d4e2977"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeForwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4584ed04-37b9-45dc-93ed-c65a9b7ceed3"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeBackwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69ffc9ab-6b6d-4c3f-8fdd-d62f6a2c0926"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeBackwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -736,6 +798,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+        m_UI_ThemeBackwards = m_UI.FindAction("ThemeBackwards", throwIfNotFound: true);
+        m_UI_ThemeForwards = m_UI.FindAction("ThemeForwards", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -878,6 +942,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Navigate;
+    private readonly InputAction m_UI_ThemeBackwards;
+    private readonly InputAction m_UI_ThemeForwards;
     private readonly InputAction m_UI_Submit;
     private readonly InputAction m_UI_Cancel;
     private readonly InputAction m_UI_Point;
@@ -892,6 +958,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         private @PlayerInputAction m_Wrapper;
         public UIActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @ThemeBackwards => m_Wrapper.m_UI_ThemeBackwards;
+        public InputAction @ThemeForwards => m_Wrapper.m_UI_ThemeForwards;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputAction @Point => m_Wrapper.m_UI_Point;
@@ -913,6 +981,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Navigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
                 @Navigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
                 @Navigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @ThemeBackwards.started -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeBackwards;
+                @ThemeBackwards.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeBackwards;
+                @ThemeBackwards.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeBackwards;
+                @ThemeForwards.started -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeForwards;
+                @ThemeForwards.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeForwards;
+                @ThemeForwards.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnThemeForwards;
                 @Submit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                 @Submit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                 @Submit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
@@ -947,6 +1021,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Navigate.started += instance.OnNavigate;
                 @Navigate.performed += instance.OnNavigate;
                 @Navigate.canceled += instance.OnNavigate;
+                @ThemeBackwards.started += instance.OnThemeBackwards;
+                @ThemeBackwards.performed += instance.OnThemeBackwards;
+                @ThemeBackwards.canceled += instance.OnThemeBackwards;
+                @ThemeForwards.started += instance.OnThemeForwards;
+                @ThemeForwards.performed += instance.OnThemeForwards;
+                @ThemeForwards.canceled += instance.OnThemeForwards;
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
@@ -990,6 +1070,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
+        void OnThemeBackwards(InputAction.CallbackContext context);
+        void OnThemeForwards(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);

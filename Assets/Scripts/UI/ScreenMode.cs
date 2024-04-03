@@ -11,7 +11,7 @@ public class ScreenMode : MonoBehaviour
     [SerializeField] SpriteRenderer screenBackground;
     [SerializeField] Graphic[] backgroundGraphics, middlegroundGraphics, foregroundGraphics;
     public List<Theme> themes = new List<Theme>();
-    int currentThemeIndex = 0;
+    public int currentThemeIndex;
 
     void Start()
     {
@@ -31,6 +31,8 @@ public class ScreenMode : MonoBehaviour
 
     public void CycleThemes(InputAction.CallbackContext context)
     {
+        themes[currentThemeIndex].current = false;
+
         switch (context.action.name)
         {
             case "ThemeForwards":
@@ -47,7 +49,10 @@ public class ScreenMode : MonoBehaviour
                     currentThemeIndex = themes.Count - 1;
                 }
                 break;
+            default: currentThemeIndex = 0; break;
         }
+
+        themes[currentThemeIndex].current = true;
 
         SetTheme();
     }
@@ -56,8 +61,9 @@ public class ScreenMode : MonoBehaviour
     {
         foreach (Theme theme in themes)
         {
-            if (theme.orderIndex == currentThemeIndex)
+            if (theme.current)
             {
+                currentThemeIndex = theme.orderIndex;
                 screenBackground.color = themes[currentThemeIndex].background;
                 UpdateThemeItems(backgroundGraphics, themes[currentThemeIndex].background);
                 UpdateThemeItems(middlegroundGraphics, themes[currentThemeIndex].middleground);

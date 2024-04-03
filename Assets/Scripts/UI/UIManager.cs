@@ -10,6 +10,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] ScreenMode screenMode;
     [SerializeField] GameObject main, controls, keyboard, controller,
         keyboardToggle, controllerToggle, mainFirstButton, controlsFirstButton;
     //[SerializeField] InputActionReference Colour1 = null, Colour2 = null, Colour3 = null, Colour4 = null;
@@ -25,6 +26,9 @@ public class UIManager : MonoBehaviour
         Controls.EnableUIControls();
         Controls.DisablePlayerControls();
         Controls.EnableCursor();
+
+        Controls.playerControls.UI.ThemeForwards.performed += screenMode.CycleThemes;
+        Controls.playerControls.UI.ThemeBackwards.performed += screenMode.CycleThemes;
 
         main.SetActive(true);
         controls.SetActive(false);

@@ -209,6 +209,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ThemeBackwards",
+                    "type": "Button",
+                    "id": "169abb54-d407-4e04-ab31-e0f2e6929078",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThemeForwards",
+                    "type": "Button",
+                    "id": "c7a2338e-29bd-4e4f-bcf9-d3ca57ac12cb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Submit",
                     "type": "Button",
                     "id": "e1b17cdd-3125-4693-bf76-efcca920eeea",
@@ -695,6 +713,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b6e0c98-4951-4024-827a-ea812ba2c77d",
+                    "path": "<Keyboard>/equals",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThemeForwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1e1fb0b-3460-4f50-b706-f5746d4e2977",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThemeForwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4584ed04-37b9-45dc-93ed-c65a9b7ceed3",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThemeBackwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69ffc9ab-6b6d-4c3f-8fdd-d62f6a2c0926",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThemeBackwards",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

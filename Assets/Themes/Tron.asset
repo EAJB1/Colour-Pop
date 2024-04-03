@@ -16,3 +16,4 @@ MonoBehaviour:
   middleground: {r: 0, g: 0.14901961, b: 0.14901961, a: 1}
   foreground: {r: 0, g: 1, b: 1, a: 1}
   orderIndex: 5
+  current: 0
