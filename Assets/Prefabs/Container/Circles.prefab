@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 0}
+  screenMode: {fileID: 0}
   spawnWidth: 4.7
   spawnHeight: 4.7
   colour1: {fileID: 0}
@@ -188,17 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 0}
   waveNumberTxt: {fileID: 0}
-  indicatorDurationTxt: {fileID: 0}
-  secondsTxt: {fileID: 0}
-  totalIndicatorDurationTxt: {fileID: 0}
-  maxDurationStr: ' MAX!'
-  secStr: (sec)
   totalColoursPopped: {fileID: 0}
-  totalIndicatorDuration: 0
-  currentDuration: 0
-  minDuration: 0.25
-  maxDuration: 2.25
-  indicatorDecrease: 0.01
   currentWave: 0
   maxCircleCount: 1
 --- !u!114 &8745002111754360692

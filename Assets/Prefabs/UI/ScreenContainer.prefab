@@ -2770,9 +2770,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e5beb77522c7c14e822bc9e73bd6539, type: 2}
   - {fileID: 11400000, guid: 4280d4b3ec6bc8540904ded9421f9c15, type: 2}
   - {fileID: 11400000, guid: da50ce1d89691b94dbf1f30d56bf1eb1, type: 2}
-  - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
   - {fileID: 11400000, guid: 47159dcd9f49c6648b370f969c4ce924, type: 2}
   - {fileID: 11400000, guid: 406c564d77380ed44a9e06d11d0f412a, type: 2}
+  - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
 --- !u!114 &8537002890981815082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5634,6 +5634,11 @@ MonoBehaviour:
   colours: {fileID: 0}
   waveManager: {fileID: 0}
   circles: {fileID: 0}
+  maxDurationStr: ' MAX!'
+  secStr: (sec)
+  indicatorDurationTxt: {fileID: 6481256669886024050}
+  secondsTxt: {fileID: 5644772389243175321}
+  totalIndicatorDurationTxt: {fileID: 4072352133243846134}
   indicatorGraphic: {fileID: 527529989637555834}
   availableColours:
   - {r: 0.882353, g: 0.25490198, b: 0.25490198, a: 1}
@@ -5642,6 +5647,11 @@ MonoBehaviour:
   - {r: 1, g: 0.9098039, b: 0.25490198, a: 1}
   currentIndicatorColour: {r: 0, g: 0, b: 0, a: 0}
   weightThreshold: 5
+  totalIndicatorDuration: 0
+  currentDuration: 0
+  minDuration: 0.25
+  maxDuration: 2.25
+  indicatorDecrease: 0.01
 --- !u!1 &8679033709417528175
 GameObject:
   m_ObjectHideFlags: 0

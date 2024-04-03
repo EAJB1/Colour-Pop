@@ -62,6 +62,24 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThemeForwards"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca315170-6665-4703-8a01-bd8e1347e3bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThemeBackwards"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9b3f843-cb1f-4dea-8f93-cd25de196a39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +168,50 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Colour4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6beae0ef-f37f-422c-bedb-3942fba8300f"",
+                    ""path"": ""<Keyboard>/equals"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeForwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcca3aa9-febc-4343-80e3-ba75fab0b012"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeForwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da60320c-82a2-4795-a501-c1b3f6fc9cc0"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeBackwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c9e3862-c548-450e-b1b3-07f7b95428b8"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThemeBackwards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -669,6 +731,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_Player_Colour2 = m_Player.FindAction("Colour2", throwIfNotFound: true);
         m_Player_Colour3 = m_Player.FindAction("Colour3", throwIfNotFound: true);
         m_Player_Colour4 = m_Player.FindAction("Colour4", throwIfNotFound: true);
+        m_Player_ThemeForwards = m_Player.FindAction("ThemeForwards", throwIfNotFound: true);
+        m_Player_ThemeBackwards = m_Player.FindAction("ThemeBackwards", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -744,6 +808,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Colour2;
     private readonly InputAction m_Player_Colour3;
     private readonly InputAction m_Player_Colour4;
+    private readonly InputAction m_Player_ThemeForwards;
+    private readonly InputAction m_Player_ThemeBackwards;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -752,6 +818,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Colour2 => m_Wrapper.m_Player_Colour2;
         public InputAction @Colour3 => m_Wrapper.m_Player_Colour3;
         public InputAction @Colour4 => m_Wrapper.m_Player_Colour4;
+        public InputAction @ThemeForwards => m_Wrapper.m_Player_ThemeForwards;
+        public InputAction @ThemeBackwards => m_Wrapper.m_Player_ThemeBackwards;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -773,6 +841,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Colour4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnColour4;
                 @Colour4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnColour4;
                 @Colour4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnColour4;
+                @ThemeForwards.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeForwards;
+                @ThemeForwards.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeForwards;
+                @ThemeForwards.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeForwards;
+                @ThemeBackwards.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeBackwards;
+                @ThemeBackwards.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeBackwards;
+                @ThemeBackwards.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThemeBackwards;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -789,6 +863,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Colour4.started += instance.OnColour4;
                 @Colour4.performed += instance.OnColour4;
                 @Colour4.canceled += instance.OnColour4;
+                @ThemeForwards.started += instance.OnThemeForwards;
+                @ThemeForwards.performed += instance.OnThemeForwards;
+                @ThemeForwards.canceled += instance.OnThemeForwards;
+                @ThemeBackwards.started += instance.OnThemeBackwards;
+                @ThemeBackwards.performed += instance.OnThemeBackwards;
+                @ThemeBackwards.canceled += instance.OnThemeBackwards;
             }
         }
     }
@@ -904,6 +984,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnColour2(InputAction.CallbackContext context);
         void OnColour3(InputAction.CallbackContext context);
         void OnColour4(InputAction.CallbackContext context);
+        void OnThemeForwards(InputAction.CallbackContext context);
+        void OnThemeBackwards(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

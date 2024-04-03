@@ -10,4 +10,5 @@ public class Theme : ScriptableObject
     public Color background;
     public Color middleground;
     public Color foreground;
+    public int orderIndex;
 }

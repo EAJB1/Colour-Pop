@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class ScreenMode : MonoBehaviour
 {
@@ -14,38 +15,58 @@ public class ScreenMode : MonoBehaviour
 
     void Start()
     {
+        SetAlpha(1f);
+        SetTheme();
+    }
+
+    void SetAlpha(float alpha)
+    {
         foreach (Theme theme in themes)
         {
-            theme.background.a = 1f;
-            theme.middleground.a = 1f;
-            theme.foreground.a = 1f;
+            theme.background.a = alpha;
+            theme.middleground.a = alpha;
+            theme.foreground.a = alpha;
         }
-
-        screenBackground.color = themes[currentThemeIndex].background;
-        UpdateTheme(backgroundGraphics, themes[currentThemeIndex].background);
-        UpdateTheme(middlegroundGraphics, themes[currentThemeIndex].middleground);
-        UpdateTheme(foregroundGraphics, themes[currentThemeIndex].foreground);
     }
 
-    void Update()
+    public void CycleThemes(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyBinds.ThemeMode))
+        switch (context.action.name)
         {
-            currentThemeIndex++;
+            case "ThemeForwards":
+                currentThemeIndex++;
+                if (currentThemeIndex == themes.Count)
+                {
+                    currentThemeIndex = 0;
+                }
+                break;
+            case "ThemeBackwards":
+                currentThemeIndex--;
+                if (currentThemeIndex < 0)
+                {
+                    currentThemeIndex = themes.Count - 1;
+                }
+                break;
+        }
 
-            if (currentThemeIndex >= themes.Count)
+        SetTheme();
+    }
+
+    void SetTheme()
+    {
+        foreach (Theme theme in themes)
+        {
+            if (theme.orderIndex == currentThemeIndex)
             {
-                currentThemeIndex -= themes.Count;
+                screenBackground.color = themes[currentThemeIndex].background;
+                UpdateThemeItems(backgroundGraphics, themes[currentThemeIndex].background);
+                UpdateThemeItems(middlegroundGraphics, themes[currentThemeIndex].middleground);
+                UpdateThemeItems(foregroundGraphics, themes[currentThemeIndex].foreground);
             }
-
-            screenBackground.color = themes[currentThemeIndex].background;
-            UpdateTheme(backgroundGraphics, themes[currentThemeIndex].background);
-            UpdateTheme(middlegroundGraphics, themes[currentThemeIndex].middleground);
-            UpdateTheme(foregroundGraphics, themes[currentThemeIndex].foreground);
         }
     }
 
-    void UpdateTheme(Graphic[] graphics, Color c)
+    void UpdateThemeItems(Graphic[] graphics, Color c)
     {
         foreach (Graphic g in graphics)
         {

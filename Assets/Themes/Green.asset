@@ -15,3 +15,4 @@ MonoBehaviour:
   background: {r: 0.058620676, g: 0.15, b: 0.02241379, a: 1}
   middleground: {r: 0.14687496, g: 0.4, b: 0.046875, a: 1}
   foreground: {r: 0.3372549, g: 0.91372555, b: 0.10980393, a: 1}
+  orderIndex: 3

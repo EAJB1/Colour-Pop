@@ -10,6 +10,7 @@ public class Colours : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] Indicator indicator;
+    [SerializeField] ScreenMode screenMode;
     WaveManager waveManager;
     AudioManager audioManager;
 
@@ -61,6 +62,8 @@ public class Colours : MonoBehaviour
         Controls.playerControls.Player.Colour2.performed += ColourKey;
         Controls.playerControls.Player.Colour3.performed += ColourKey;
         Controls.playerControls.Player.Colour4.performed += ColourKey;
+        Controls.playerControls.Player.ThemeForwards.performed += screenMode.CycleThemes;
+        Controls.playerControls.Player.ThemeBackwards.performed += screenMode.CycleThemes;
 
         // Reverse order in layers array to assign correct object layer.
         ReverseArray(minAnim, maxAnim);

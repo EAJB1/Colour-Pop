@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &178534828 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4072352133243846134, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
-  m_PrefabInstance: {fileID: 7433350073405406997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &322396841 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 272017666811662394, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
@@ -352,31 +341,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1207618396 stripped
+--- !u!114 &1161020011 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6481256669886024050, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7433350073405406999, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
   m_PrefabInstance: {fileID: 7433350073405406997}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 792c3811687404640b9a1f98b00865e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1213969887 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 514218465594322260, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
-  m_PrefabInstance: {fileID: 7433350073405406997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1401611890 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5644772389243175321, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
   m_PrefabInstance: {fileID: 7433350073405406997}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -635,6 +613,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1444208346}
     - target: {fileID: 1763628616085528754, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
+      propertyPath: screenMode
+      value: 
+      objectReference: {fileID: 1161020011}
+    - target: {fileID: 1763628616085528754, guid: c70665127d3c2e94caffa16698fb4dbf, type: 3}
       propertyPath: particleParent
       value: 
       objectReference: {fileID: 1895688704}
@@ -808,21 +790,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1763628615691213003}
     - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
-      propertyPath: secondsTxt
-      value: 
-      objectReference: {fileID: 1401611890}
-    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1763628615691213004}
-    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
-      propertyPath: indicatorDurationTxt
-      value: 
-      objectReference: {fileID: 1207618396}
-    - target: {fileID: 1609921205278024096, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
-      propertyPath: totalIndicatorDurationTxt
-      value: 
-      objectReference: {fileID: 178534828}
     - target: {fileID: 3246255572164264964, guid: 023a2fc2bdb5ea74ca400f1b629d6cac, type: 3}
       propertyPath: m_RootOrder
       value: 1
