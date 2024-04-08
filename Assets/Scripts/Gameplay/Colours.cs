@@ -72,7 +72,7 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Reverse the order of an array. For example, 0 to 9 becomes 9 to 0.
+    /// Reverse the order of an array (0 to 9 becomes 9 to 0).
     /// </summary>
     public void ReverseArray(int minLength, int maxLength)
     {

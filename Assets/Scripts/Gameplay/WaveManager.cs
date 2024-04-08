@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
 
     public TMP_Text totalColoursPopped;
     public int currentWave = 0, maxCircleCount = 1;
+    public bool firstColourOfWave; // First indicator colour of the wave.
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         waveNumberTxt.text = currentWave.ToString();
         maxCircleCount = currentWave;
+        firstColourOfWave = true;
 
         if (currentWave > 1)
         {

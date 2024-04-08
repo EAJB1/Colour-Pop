@@ -16,7 +16,7 @@ public class Indicator : MonoBehaviour
     public Graphic indicatorGraphic;
     public Color[] availableColours;
     public Dictionary<Color, int> colourWeights;
-    public Color currentIndicatorColour;
+    public Color currentIndicatorColour, previousIndicatorColour;
     public int weightThreshold = 5;
     public float totalIndicatorDuration, currentDuration, minDuration = 0.25f, maxDuration = 2.25f, indicatorDecrease = .01f;
 
@@ -59,11 +59,21 @@ public class Indicator : MonoBehaviour
             }
             else if (currentDuration <= 0) // Set new indicator colour.
             {
+                previousIndicatorColour = currentIndicatorColour;
+
                 isFirstMillisecond = true;
                 currentDuration = totalIndicatorDuration;
 
                 ChooseRandomColour();
                 OverrideColour();
+
+                // Make sure the first colour of the new wave is different from the previous colour.
+                if (waveManager.firstColourOfWave &&
+                    currentIndicatorColour == previousIndicatorColour)
+                {
+                    waveManager.firstColourOfWave = false;
+                    currentIndicatorColour = NotPreviousColour(colours.ReturnLastColour());
+                }
 
                 // Spawn a circle with the new indicator colour.
                 colours.SpawnIndicatorColour();
@@ -141,5 +151,33 @@ public class Indicator : MonoBehaviour
             currentIndicatorColour = colours.ReturnLastColour();
             //currentDuration = 0f;
         }
+    }
+
+    /// <summary>
+    /// Choose another random colour not equal to the previous colour.
+    /// </summary>
+    Color NotPreviousColour(Color previousColour)
+    {
+        List<Color> temp = new List<Color>();
+        
+        // New temporary list with every colour.
+        foreach (Color colour in availableColours)
+        {
+            temp.Add(colour);
+        }
+
+        // Remove previous colour.
+        for (int i = 0; i < temp.Count; i++)
+        {
+            if (temp[i] == previousColour)
+            {
+                temp.Remove(temp[i]);
+            }
+        }
+
+        int rnd = Random.Range(0, temp.Count);
+
+        // Choose another colour.
+        return temp[rnd];
     }
 }

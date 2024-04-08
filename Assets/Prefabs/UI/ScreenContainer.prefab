@@ -2752,7 +2752,6 @@ MonoBehaviour:
   - {fileID: 1127378711747005533}
   - {fileID: 2785003674005694628}
   - {fileID: 7366710065767118531}
-  - {fileID: 527529989637555834}
   - {fileID: 6091053589783217687}
   - {fileID: 6481256669886024050}
   - {fileID: 5644772389243175321}
@@ -2773,6 +2772,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47159dcd9f49c6648b370f969c4ce924, type: 2}
   - {fileID: 11400000, guid: 406c564d77380ed44a9e06d11d0f412a, type: 2}
   - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
+  currentThemeIndex: 0
 --- !u!114 &8537002890981815082
 MonoBehaviour:
   m_ObjectHideFlags: 0
