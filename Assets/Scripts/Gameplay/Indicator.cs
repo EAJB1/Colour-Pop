@@ -18,7 +18,7 @@ public class Indicator : MonoBehaviour
     public Dictionary<Color, int> colourWeights;
     public Color currentIndicatorColour, previousIndicatorColour;
     public int weightThreshold = 5;
-    public float totalIndicatorDuration, currentDuration, minDuration = 0.25f, maxDuration = 2.25f, indicatorDecrease = .01f;
+    public float totalIndicatorDuration, currentDuration, minDuration = 0.25f, maxDuration = 2.25f, indicatorDurationMultiplier = .8f;
 
     int totalWeight = 4;
     int weightIndex;
@@ -46,10 +46,11 @@ public class Indicator : MonoBehaviour
     {
         if (!coroutineRunningCurrent)
         {
-            if (waveManager.currentWave == 1) // Set first indicator colour.
+            if (waveManager.currentWave == 1) // Set first indicator colour of wave 1.
             {
                 currentIndicatorColour = colours.ReturnLastColour();
                 indicatorGraphic.color = currentIndicatorColour;
+                //previousIndicatorColour = currentIndicatorColour;
             }
 
             if (totalIndicatorDuration == minDuration) // Stop at min duration.
@@ -67,16 +68,23 @@ public class Indicator : MonoBehaviour
                 ChooseRandomColour();
                 OverrideColour();
 
-                // Make sure the first colour of the new wave is different from the previous colour.
-                if (waveManager.firstColourOfWave &&
-                    currentIndicatorColour == previousIndicatorColour)
+                // First colour of the wave is equal to one of the current colours.
+                if (waveManager.firstColourOfWave)
                 {
+                    waveManager.CheckIndicatorColour();
+
+                    // Make sure the first colour of the new wave is different from the previous colour.
+                    if (currentIndicatorColour == previousIndicatorColour &&
+                        waveManager.currentWave > 1)
+                    {
+                        currentIndicatorColour = NotPreviousColour(colours.ReturnLastColour());
+                    }
+                    
                     waveManager.firstColourOfWave = false;
-                    currentIndicatorColour = NotPreviousColour(colours.ReturnLastColour());
                 }
 
                 // Spawn a circle with the new indicator colour.
-                colours.SpawnIndicatorColour();
+                //colours.SpawnIndicatorColour();
 
                 // Set the object sprite renderer to the current colour.
                 indicatorGraphic.color = currentIndicatorColour;
@@ -106,7 +114,7 @@ public class Indicator : MonoBehaviour
         coroutineRunningCurrent = false;
     }
 
-    void ChooseRandomColour()
+    public void ChooseRandomColour()
     {
         // Choose random colour
         weightIndex = Random.Range(0, totalWeight);
@@ -144,12 +152,11 @@ public class Indicator : MonoBehaviour
     /// <summary>
     /// Set indicator to last colour left.
     /// </summary>
-    void OverrideColour()
+    public void OverrideColour()
     {
         if (colours.currentColourCount == 1 && colours.ReturnLastColour() != Color.black)
         {
             currentIndicatorColour = colours.ReturnLastColour();
-            //currentDuration = 0f;
         }
     }
 
@@ -160,8 +167,8 @@ public class Indicator : MonoBehaviour
     {
         List<Color> temp = new List<Color>();
         
-        // New temporary list with every colour.
-        foreach (Color colour in availableColours)
+        // New temporary list with every current colour.
+        foreach (Color colour in colours.ReturnCurrentColours())
         {
             temp.Add(colour);
         }
@@ -175,9 +182,15 @@ public class Indicator : MonoBehaviour
             }
         }
 
-        int rnd = Random.Range(0, temp.Count);
-
         // Choose another colour.
-        return temp[rnd];
+        return temp[Random.Range(0, temp.Count)];
+    }
+
+    /// <summary>
+    /// Return a random colour from the current colours spawned in the new wave.
+    /// </summary>
+    public Color NewColourFromWave()
+    {
+        return colours.ReturnCurrentColours()[Random.Range(0, colours.ReturnCurrentColours().Count)];
     }
 }

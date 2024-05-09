@@ -65,23 +65,8 @@ public class Colours : MonoBehaviour
         Controls.playerControls.Player.ThemeForwards.performed += screenMode.CycleThemes;
         Controls.playerControls.Player.ThemeBackwards.performed += screenMode.CycleThemes;
 
-        // Reverse order in layers array to assign correct object layer.
-        ReverseArray(minAnim, maxAnim);
 
         pointsChange = basePointsChange;
-    }
-
-    /// <summary>
-    /// Reverse the order of an array (0 to 9 becomes 9 to 0).
-    /// </summary>
-    public void ReverseArray(int minLength, int maxLength)
-    {
-        layerOrder = new int[maxLength - (minLength - 1)];
-
-        for (int i = 0; i < layerOrder.Length; i++)
-        {
-            layerOrder[i] = maxLength - i;
-        }
     }
 
     /// <summary>
@@ -123,18 +108,6 @@ public class Colours : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn a new wave when there are no circles left.
-    /// </summary>
-    public void CheckWaveState()
-    {
-        if (currentCircleCount == 0)
-        {
-            waveManager.InitWave();
-            waveManager.SpawnWave();
-        }
-    }
-
-    /// <summary>
     /// Return the last colour in the wave.
     /// </summary>
     public Color ReturnLastColour()
@@ -144,6 +117,18 @@ public class Colours : MonoBehaviour
         else if (blue) { return indicator.availableColours[2]; }
         else if (yellow) { return indicator.availableColours[3]; }
         return Color.black;
+    }
+
+    public List<Color> ReturnCurrentColours()
+    {
+        List<Color> temp = new List<Color>();
+
+        if (red) { temp.Add(indicator.availableColours[0]); }
+        if (green) { temp.Add(indicator.availableColours[1]); }
+        if (blue) { temp.Add(indicator.availableColours[2]); }
+        if (yellow) { temp.Add(indicator.availableColours[3]); }
+
+        return temp;
     }
 
     /// <summary>
@@ -193,7 +178,7 @@ public class Colours : MonoBehaviour
         UpdateCircleCount();
         StartCoroutine(CurrentActiveColours());
 
-        CheckWaveState();
+        waveManager.CheckWaveState();
     }
 
     /// <summary>
@@ -404,6 +389,16 @@ public class Colours : MonoBehaviour
     /// </summary>
     void UpdateOrderInLayer(int index)
     {
-        targetClone.GetComponent<SpriteRenderer>().sortingOrder = layerOrder[index - 1];
+        SpriteRenderer spriteRenderer = targetClone.GetComponent<SpriteRenderer>();
+
+        for(int i = 0; i < indicator.availableColours.Length; i++)
+        {
+            if (indicator.availableColours[i] == spriteRenderer.color)
+            {
+                spriteRenderer.sortingOrder = i - (index * indicator.availableColours.Length);
+                return;
+            }
+        }
+
     }
 }

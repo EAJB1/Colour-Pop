@@ -187,11 +187,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b0db6f8b0e5ba4abdc336ce26cd0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveCircle: {fileID: -4251863891946252317, guid: b54c16e2575b33e4f92fb7697dd5e982, type: 3}
   indicator: {fileID: 0}
   waveNumberTxt: {fileID: 0}
   totalColoursPopped: {fileID: 0}
   currentWave: 0
   maxCircleCount: 1
+  firstColourOfWave: 0
 --- !u!114 &8745002111754360692
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ TagManager:
   - UI
   - 
   - Colours
-  - 
+  - PostProcessing
   - 
   - 
   - 
@@ -56,15 +56,6 @@ TagManager:
   - name: Colours
     uniqueID: 579718077
     locked: 0
-  - name: EdgeBackground
-    uniqueID: 3234113085
-    locked: 0
-  - name: EdgeOutline
-    uniqueID: 2141127673
-    locked: 0
-  - name: ScreenOutline
-    uniqueID: 2742586077
-    locked: 0
-  - name: Foreground
-    uniqueID: 2013643285
+  - name: UI
+    uniqueID: 2249037569
     locked: 0

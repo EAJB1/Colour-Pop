@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Tab] Theme'
+  m_text: '[-/+] Theme'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b2f758c1cf9c6440a932d549045f156, type: 2}
   m_sharedMaterial: {fileID: 2278909227936531335, guid: 7b2f758c1cf9c6440a932d549045f156, type: 2}
@@ -2716,6 +2716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenBackground: {fileID: 0}
+  otherForeground:
+  - {fileID: 0}
   backgroundGraphics:
   - {fileID: 8302107724806697378}
   - {fileID: 8039873852777790163}
@@ -5646,12 +5648,13 @@ MonoBehaviour:
   - {r: 0.21960784, g: 0.59607846, b: 1, a: 1}
   - {r: 1, g: 0.9098039, b: 0.25490198, a: 1}
   currentIndicatorColour: {r: 0, g: 0, b: 0, a: 0}
+  previousIndicatorColour: {r: 0, g: 0, b: 0, a: 0}
   weightThreshold: 5
   totalIndicatorDuration: 0
   currentDuration: 0
   minDuration: 0.25
-  maxDuration: 2.25
-  indicatorDecrease: 0.01
+  maxDuration: 1
+  indicatorDurationMultiplier: 0.95
 --- !u!1 &8679033709417528175
 GameObject:
   m_ObjectHideFlags: 0

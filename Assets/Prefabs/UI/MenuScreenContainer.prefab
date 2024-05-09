@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Tab] Theme'
+  m_text: '[-/+] Theme'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b2f758c1cf9c6440a932d549045f156, type: 2}
   m_sharedMaterial: {fileID: 2278909227936531335, guid: 7b2f758c1cf9c6440a932d549045f156, type: 2}
@@ -215,6 +215,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47159dcd9f49c6648b370f969c4ce924, type: 2}
   - {fileID: 11400000, guid: 406c564d77380ed44a9e06d11d0f412a, type: 2}
   - {fileID: 11400000, guid: 276924e0fa8ac0e49bb104e7d3692209, type: 2}
+  currentThemeIndex: 0
 --- !u!1 &2557995711632712441
 GameObject:
   m_ObjectHideFlags: 0
