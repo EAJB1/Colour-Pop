@@ -68,10 +68,11 @@ public class Indicator : MonoBehaviour
                 ChooseRandomColour();
                 OverrideColour();
 
+                waveManager.CheckIndicatorColour();
+
                 // First colour of the wave is equal to one of the current colours.
                 if (waveManager.firstColourOfWave)
                 {
-                    waveManager.CheckIndicatorColour();
 
                     // Make sure the first colour of the new wave is different from the previous colour.
                     if (currentIndicatorColour == previousIndicatorColour &&
