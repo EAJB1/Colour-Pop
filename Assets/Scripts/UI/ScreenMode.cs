@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class ScreenMode : MonoBehaviour
 {
@@ -58,6 +57,9 @@ public class ScreenMode : MonoBehaviour
         SetTheme();
     }
 
+    /// <summary>
+    /// Update current theme by checking which scriptable object has current set True.
+    /// </summary>
     void SetTheme()
     {
         foreach (Theme theme in themes)

@@ -8,13 +8,13 @@ public class WaveCircle : MonoBehaviour
 
     public float animationSpeed;
 
-    void Start()
+    public void Init()
     {
         animator = GetComponent<Animator>();
         animator.enabled = false;
     }
 
-    public void StartWaveCircle()
+    public void PlayWaveCircle()
     {
         animator.enabled = true;
         animator.SetTrigger("CircleTrigger");

@@ -22,9 +22,10 @@ public class Indicator : MonoBehaviour
 
     int totalWeight = 4;
     int weightIndex;
-    bool coroutineRunningCurrent = false, isFirstMillisecond = true;
+    bool isFirstMillisecond = true;
+    Coroutine indicatorCoroutine = null;
 
-    void Start()
+    public void Init()
     {
         indicatorGraphic = GetComponent<Graphic>();
 
@@ -44,21 +45,24 @@ public class Indicator : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!coroutineRunningCurrent)
+        if (indicatorCoroutine == null)
         {
-            if (waveManager.currentWave == 1) // Set first indicator colour of wave 1.
+            // Set first indicator colour of wave 1.
+            if (waveManager.currentWave == 1)
             {
                 currentIndicatorColour = colours.ReturnLastColour();
                 indicatorGraphic.color = currentIndicatorColour;
                 //previousIndicatorColour = currentIndicatorColour;
             }
 
-            if (totalIndicatorDuration == minDuration) // Stop at min duration.
+            // Stop at min duration.
+            if (totalIndicatorDuration == minDuration)
             {
                 indicatorDurationTxt.text = minDuration.ToString() + maxDurationStr;
                 secondsTxt.text = "";
             }
-            else if (currentDuration <= 0) // Set new indicator colour.
+            // Set new indicator colour.
+            else if (currentDuration <= 0)
             {
                 previousIndicatorColour = currentIndicatorColour;
 
@@ -68,11 +72,10 @@ public class Indicator : MonoBehaviour
                 ChooseRandomColour();
                 OverrideColour();
 
-                waveManager.CheckIndicatorColour();
-
                 // First colour of the wave is equal to one of the current colours.
                 if (waveManager.firstColourOfWave)
                 {
+                    waveManager.CheckIndicatorColour();
 
                     // Make sure the first colour of the new wave is different from the previous colour.
                     if (currentIndicatorColour == previousIndicatorColour &&
@@ -90,15 +93,18 @@ public class Indicator : MonoBehaviour
                 // Set the object sprite renderer to the current colour.
                 indicatorGraphic.color = currentIndicatorColour;
 
-                StartCoroutine(CurrentIndicatorDuration());
+                indicatorCoroutine = StartCoroutine(CurrentIndicatorDuration());
             }
-            else { StartCoroutine(CurrentIndicatorDuration()); } // Decrement current duration.
+            // Decrement current duration.
+            else
+            {
+                indicatorCoroutine = StartCoroutine(CurrentIndicatorDuration());
+            }
         }
     }
 
     IEnumerator CurrentIndicatorDuration()
     {
-        coroutineRunningCurrent = true;
         float millisecond = .01f;
 
         if (currentDuration > 0f && !isFirstMillisecond)
@@ -112,7 +118,7 @@ public class Indicator : MonoBehaviour
         indicatorDurationTxt.text = currentDuration.ToString();
 
         yield return new WaitForSeconds(millisecond);
-        coroutineRunningCurrent = false;
+        indicatorCoroutine = null;
     }
 
     public void ChooseRandomColour()
@@ -166,13 +172,14 @@ public class Indicator : MonoBehaviour
     /// </summary>
     Color NotPreviousColour(Color previousColour)
     {
-        List<Color> temp = new List<Color>();
-        
+        List<Color> temp = new List<Color>(colours.ReturnCurrentColours());
+
+        Debug.Log("Temp count: " + temp.Count);
         // New temporary list with every current colour.
-        foreach (Color colour in colours.ReturnCurrentColours())
+        /*foreach (Color colour in colours.ReturnCurrentColours())
         {
             temp.Add(colour);
-        }
+        }*/
 
         // Remove previous colour.
         for (int i = 0; i < temp.Count; i++)
@@ -180,6 +187,7 @@ public class Indicator : MonoBehaviour
             if (temp[i] == previousColour)
             {
                 temp.Remove(temp[i]);
+                break;
             }
         }
 

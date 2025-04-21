@@ -156,7 +156,7 @@ MonoBehaviour:
   currentPoints: 0
   pointsChange: 0
   multiplier: 0
-  basePointsChange: 100
+  basePointsChange: 1
   clones: []
   target: {fileID: 6724663385767642979, guid: 289ff64547ec3d64e96cb5f3681da097, type: 3}
   targetParent: {fileID: 1763628616085528765}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b0db6f8b0e5ba4abdc336ce26cd0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCircle: {fileID: -4251863891946252317, guid: b54c16e2575b33e4f92fb7697dd5e982, type: 3}
+  waveCircle: {fileID: 0}
   indicator: {fileID: 0}
   waveNumberTxt: {fileID: 0}
   totalColoursPopped: {fileID: 0}

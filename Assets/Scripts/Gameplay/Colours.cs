@@ -26,7 +26,7 @@ public class Colours : MonoBehaviour
     [Header("Points")]
     [SerializeField] TMP_Text pointsNumberTxt;
     public float currentPoints, pointsChange, multiplier;
-    [SerializeField] float basePointsChange = 100f;
+    [SerializeField] float basePointsChange;
 
     [Header("Target Properties")]
     int randomTargetAnimation, keyColour;
@@ -44,27 +44,24 @@ public class Colours : MonoBehaviour
     public float minAnimationSpeed = 0.25f;
     public float maxAnimationSpeed = 1.75f;
     [SerializeField] int minAnim = 2, maxAnim = 16;
-    int[] layerOrder = new int[0];
     float targetAnimationSpeed;
     Animator targetAnimator;
     Vector2 targetPosition;
 
-    void Start()
+    public void InitControls()
     {
-        waveManager = GetComponent<WaveManager>();
-        audioManager = GetComponent<AudioManager>();
-
-        Controls.Init();
-        Controls.DisableUIControls();
-        Controls.EnablePlayerControls();
-        Controls.DisableCursor();
         Controls.playerControls.Player.Colour1.performed += ColourKey;
         Controls.playerControls.Player.Colour2.performed += ColourKey;
         Controls.playerControls.Player.Colour3.performed += ColourKey;
         Controls.playerControls.Player.Colour4.performed += ColourKey;
         Controls.playerControls.Player.ThemeForwards.performed += screenMode.CycleThemes;
         Controls.playerControls.Player.ThemeBackwards.performed += screenMode.CycleThemes;
+    }
 
+    public void Init()
+    {
+        waveManager = GetComponent<WaveManager>();
+        audioManager = GetComponent<AudioManager>();
 
         pointsChange = basePointsChange;
     }
@@ -225,7 +222,10 @@ public class Colours : MonoBehaviour
                 }
             }
         }
-        else { Failure(); }
+        else
+        {
+           Failure();
+        }
     }
 
     /// <summary>
@@ -399,6 +399,5 @@ public class Colours : MonoBehaviour
                 return;
             }
         }
-
     }
 }

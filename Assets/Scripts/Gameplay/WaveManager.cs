@@ -14,14 +14,11 @@ public class WaveManager : MonoBehaviour
     public TMP_Text totalColoursPopped;
     public int currentWave = 0, maxCircleCount = 1;
     public bool firstColourOfWave; // First indicator colour of the wave.
+    bool initialWave = true;
 
-    void Start()
+    public void Init()
     {
         colours = GetComponent<Colours>();
-
-        // Start the first wave.
-        colours.UpdateCircleCount();
-        CheckWaveState();
     }
 
     /// <summary>
@@ -29,11 +26,14 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     public void CheckWaveState()
     {
-        if (colours.currentCircleCount == 0)
+        colours.UpdateCircleCount();
+
+        if (initialWave || colours.currentCircleCount == 0)
         {
-            waveCircle.StartWaveCircle();
+            initialWave = false;
             InitWave();
             SpawnWave();
+            waveCircle.PlayWaveCircle();
         }
     }
 
@@ -61,6 +61,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnWave()
     {
+        Debug.Log("SpawnWave");
         for (int i = 0; i < maxCircleCount; i++)
         {
             colours.SpawnColour();
